@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -29,3 +30,6 @@ Route::prefix('Product')->group(function () {
     Route::post('{id}/update' , [ProductController::class , 'update'])->name('Product.update');
     Route::get('delete' , [ProductController::class , 'delete'])->name('Product.delete');
 });
+Route::get('/login',[AuthController::class,'showFormLogin'])->name('auth.showFormLogin');
+
+
