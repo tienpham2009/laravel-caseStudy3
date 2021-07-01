@@ -15,7 +15,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () { return view('index');})->name('index');
+Route::get('/', function (){
+    return redirect()->route('user.dashboard');
+})->name('home');
 
 
 Route::get('admin' , function (){
@@ -31,5 +33,14 @@ Route::prefix('Product')->group(function () {
     Route::get('delete' , [ProductController::class , 'delete'])->name('Product.delete');
 });
 Route::get('/login',[AuthController::class,'showFormLogin'])->name('auth.showFormLogin');
+Route::get('/register',[AuthController::class,'showFormRegister'])->name('auth.showFormRegister');
+Route::post('/login',[AuthController::class,'login'])->name('auth.login');
+Route::post('/register',[AuthController::class,'register'])->name('auth.register');
+
+Route::middleware('auth')->group(function (){
+    Route::get('dashboard',function (){
+        return view('index');
+    })->name('user.dashboard');
+});
 
 
