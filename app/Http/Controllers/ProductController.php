@@ -21,19 +21,18 @@ class ProductController
     public function index()
     {
         $products = $this->productService->getAll();
-
         return view('admin.products.show' , compact('products'));
     }
 
     public function create()
     {
-        return view('admin.products.create');
+        $categories = $this->productService->getCategory();
+        return view('admin.products.create' , compact('categories'));
     }
 
     public function store(ProductRequest $productRequest)
     {
         $this->productService->store($productRequest);
-
         return redirect()->route('Product.show');
     }
 
@@ -46,13 +45,13 @@ class ProductController
     public function edit($id)
     {
         $product = $this->productService->getById($id);
-        return view('admin.products.edit' , compact('product'));
+        $categories = $this->productService->getCategory();
+        return view('admin.products.edit' , compact('product' , 'categories'));
     }
 
     public function update(UpdateProductRequest $productRequest , $id)
     {
         $this->productService->update($productRequest , $id);
-        $products = $this->productService->getAll();
         return redirect()->route('Product.show');
 
     }
@@ -63,6 +62,13 @@ class ProductController
         $this->productService->destroy($data);
         return redirect()->route('Product.show');
     }
+
+    public function user()
+    {
+        $products = $this->productService->getAll();
+        return view('index' , compact('products'));
+    }
+
 
 
 

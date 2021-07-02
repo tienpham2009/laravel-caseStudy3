@@ -4,9 +4,11 @@
 namespace App\Service;
 
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Repository\Extend\ProductRepository;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Model;
 
 class ProductService
 {
@@ -25,11 +27,18 @@ class ProductService
     public function store($request)
     {
         $product  = new Product();
-
         $product->fill($request->all());
+
+        $category = new Category();
+        if ($request->new_category != null){
+            $category->name = $request->new_category;
+            $category->save();
+        }
+        $product->category_id = $category->max('id');
+
         $file = $request->image;
         if (!$request->hasFile('image')) {
-            $product->image = $file;
+            $product->image = asset('storage/productImage/default.jpg');
         } else {
             $fileExtension = $file->getClientOriginalExtension();
             $fileName = Carbon::now()->format("Y-m-d H:i:s");
@@ -52,9 +61,18 @@ class ProductService
 
     public function update($request , $id)
     {
+
         $product = $this->productRepository->findById($id);
         $oldFile = $product->image;
         $product->fill($request->all());
+
+        $category = new Category();
+        if ($request->new_category != null){
+            $category->name = $request->new_category;
+            $category->save();
+        }
+        $product->category_id = $category->max('id');
+
         $file = $request->image;
         if (!$request->hasFile('image')) {
             $product->image = $oldFile;
@@ -73,5 +91,10 @@ class ProductService
     public function destroy($data)
     {
         $this->productRepository->destroy($data);
+    }
+
+    public function getCategory()
+    {
+        return Category::all();
     }
 }

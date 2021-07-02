@@ -51,11 +51,13 @@
                                                 <th scope="col">STT</th>
                                                 <th scope="col">Tên</th>
                                                 <th scope="col">xuất sứ</th>
+                                                <th scope="col">Danh mục</th>
                                                 <th scope="col">Ngày nhập kho</th>
                                                 <th scope="col">Ngày hết hạn</th>
                                                 <th scope="col">Đơn giá (VND)</th>
                                                 <th scope="col">Đơn vị</th>
                                                 <th scope="col">Số lượng</th>
+                                                <th scope="col"></th>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -65,12 +67,16 @@
                                                     <th scope="row">{{ $key + 1 }}</th>
                                                     <td>{{ $product->name  }}</td>
                                                     <td>{{ $product->origin  }}</td>
+                                                    <td>{{ $product->category->name }}</td>
                                                     <td>{{ $product->input_date  }}</td>
                                                     <td>{{ $product->expiration_date  }}</td>
                                                     <td>{{ $product->unit_price  }}</td>
                                                     <td>{{ $product->unit  }}</td>
                                                     <td>{{ $product->amount  }}</td>
-
+                                                    <td>
+                                                        <a type="submit" class="btn btn-primary" href="{{ route('Product.edit' , $product->id) }}">Sửa</a>
+                                                        <a type="submit" class="btn btn-success" href="{{ route('Product.detail' , $product->id) }}">Chi tiết</a>
+                                                    </td>
                                                 </tr>
                                             @empty
                                                 <div class="filtr-item col-sm-2">
