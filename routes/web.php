@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 
 Route::get('/', function (){
     return redirect()->route('user.dashboard');
@@ -50,4 +52,11 @@ Route::middleware('auth')->group(function (){
     Route::get('logout',[AuthController::class,'logout'])->name('auth.logout');
 });
 
+
+Route::prefix('cart')->group(function (){
+    Route::get('/add' , [CartController::class , 'add'])->name('cart.add');
+    Route::get('/' , [CartController::class , 'show'])->name('cart.show');
+    Route::get('/delete-cart' , [CartController::class , 'delete'] )->name('cart.delete');
+    Route::get('/update' , [CartController::class , 'update'])->name('cart.update');
+});
 

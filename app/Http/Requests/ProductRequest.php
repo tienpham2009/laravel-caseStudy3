@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class ProductRequest extends FormRequest
 {
@@ -30,7 +31,8 @@ class ProductRequest extends FormRequest
             'expiry_date' => 'required|numeric',
             'amount' => 'required|numeric',
             'unit_price' => 'required|numeric',
-            'image' => 'required'
+            'image' => 'required',
+            'new_category'=>'unique:categories,name'
         ];
     }
 
@@ -47,7 +49,8 @@ class ProductRequest extends FormRequest
             'unit_price.numeric' => 'Đơn giá phải là số',
             'image.required' => 'Không được để trống',
             'expiry_date.required' => 'Không được để trống',
-            'expiry_date.numeric'=>'Hạn sử dụng phải là số'
+            'expiry_date.numeric'=>'Hạn sử dụng phải là số',
+            'new_category.unique'=>'Danh mục đã tồn tại'
         ];
     }
 }

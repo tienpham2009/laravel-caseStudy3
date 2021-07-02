@@ -29,6 +29,23 @@
                                     <label for="exampleFormControlInput1">Xuất xứ</label>
                                     <input type="text" class="form-control @error('origin') is-invalid @enderror" name="origin"  value="{{ old('origin') }}" >
                                 </div>
+                                <div class="form-group row">
+                                    <div class="col-6">
+                                        <label for="exampleFormControlInput1">Danh mục</label>
+                                        <select class="form-control" name="category_id">
+                                            @foreach($categories as $category)
+                                                <option value="{{$category->id}}">{{ $category->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-6">
+                                        <label for="exampleFormControlInput1">Danh mục khác</label>
+                                        <input type="text" class="form-control @error('origin') is-invalid @enderror" name="new_category" value="{{ old('new_category') }}">
+                                        @error('new_category')
+                                        <p class="text-danger">{{ $message }}</p>
+                                        @enderror
+                                    </div>
+                                </div>
                                 @error('origin')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
