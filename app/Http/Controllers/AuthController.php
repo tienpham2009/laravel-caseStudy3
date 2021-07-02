@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -18,17 +19,18 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        $remember= $request->has('remember');
         $email = $request->email;
         $password = $request->password;
         $data = [
             'email' => $email,
             'password' => $password
         ];
-        if (!Auth::attempt($data)) {
-            session()->flash('login-error', 'Tài khoản hoặc mật khẩu không chính xác');
-            return redirect()->route('auth.showFormLogin');
+        if (Auth::attempt($data,$remember)) {
+            return redirect()->route('user.dashboard');
         }
-        return redirect()->route('user.dashboard');
+        session()->flash('login-error', 'Tài khoản hoặc mật khẩu không chính xác');
+        return redirect()->route('auth.showFormLogin');
     }
 
     public function showFormRegister()
@@ -62,6 +64,12 @@ class AuthController extends Controller
         if ($check){
             Session::flash('register-success','Đăng ký thành công');
         }
+        return redirect()->route('auth.showFormLogin');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
         return redirect()->route('auth.showFormLogin');
     }
 }

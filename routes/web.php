@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -37,10 +38,16 @@ Route::get('/register',[AuthController::class,'showFormRegister'])->name('auth.s
 Route::post('/login',[AuthController::class,'login'])->name('auth.login');
 Route::post('/register',[AuthController::class,'register'])->name('auth.register');
 
+Route::get('/forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('auth.showForgetPassword');
+Route::post('/forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('auth.forgetPassword');
+Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('auth.showFormResetPassword');
+Route::post('/reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('auth.resetPassword');
+
 Route::middleware('auth')->group(function (){
     Route::get('dashboard',function (){
         return view('index');
     })->name('user.dashboard');
+    Route::get('logout',[AuthController::class,'logout'])->name('auth.logout');
 });
 
 

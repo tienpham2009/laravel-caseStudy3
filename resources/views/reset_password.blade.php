@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AdminLTE 3 | Log in</title>
+    <title>AdminLTE 3 | Recover Password</title>
 
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
@@ -23,21 +23,16 @@
     <!-- /.login-logo -->
     <div class="card">
         <div class="card-body login-card-body">
-            <p class="login-box-msg">Sign in to start your session</p>
+            <p class="login-box-msg">You are only one step a way from your new password, recover your password now.</p>
 
-            <form action="{{route('auth.login')}}" method="post">
-                @if(session()->has('login-error'))
-                    {{session('login-error')}}
-                @endif
-                @if(session()->has('register-success'))
-                    {{session('register-success')}}
-                @endif
+            <form action="{{route('auth.resetPassword')}}" method="post">
                 @csrf
+                <input type="hidden" name="token" value="{{ $token }}">
                 <div class="input-group mb-3">
                     <input type="email" class="form-control" name="email" placeholder="Email">
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
+                            <span class="fas fa-lock"></span>
                         </div>
                     </div>
                 </div>
@@ -49,39 +44,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-8">
-                        <div class="icheck-primary">
-                            <input type="checkbox" name="remember" id="remember">
-                            <label for="remember">
-                                Remember Me
-                            </label>
+                <div class="input-group mb-3">
+                    <input type="password" class="form-control" placeholder="Confirm Password">
+                    <div class="input-group-append">
+                        <div class="input-group-text">
+                            <span class="fas fa-lock"></span>
                         </div>
                     </div>
-                    <!-- /.col -->
-                    <div class="col-4">
-                        <button type="submit" class="btn btn-primary btn-block">Sign In</button>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary btn-block">Change password</button>
                     </div>
                     <!-- /.col -->
                 </div>
             </form>
 
-            <div class="social-auth-links text-center mb-3">
-                <p>- OR -</p>
-                <a href="#" class="btn btn-block btn-primary">
-                    <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
-                </a>
-                <a href="#" class="btn btn-block btn-danger">
-                    <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
-                </a>
-            </div>
-            <!-- /.social-auth-links -->
-
-            <p class="mb-1">
-                <a href="{{route('auth.forgetPassword')}}">I forgot my password</a>
-            </p>
-            <p class="mb-0">
-                <a href="{{route('auth.showFormRegister')}}" class="text-center">Register a new membership</a>
+            <p class="mt-3 mb-1">
+                <a href="#">Login</a>
             </p>
         </div>
         <!-- /.login-card-body -->
@@ -97,3 +77,4 @@
 <script src="{{asset('dist/js/adminlte.min.js')}}"></script>
 </body>
 </html>
+
