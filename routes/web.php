@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
@@ -15,7 +17,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [ProductController::class , 'user'])->name('index');
+
+Route::get('/', function (){
+    return redirect()->route('user.dashboard');
+})->name('home');
 
 
 Route::get('admin' , function (){
@@ -30,6 +35,23 @@ Route::prefix('Product')->group(function () {
     Route::post('{id}/update' , [ProductController::class , 'update'])->name('Product.update');
     Route::get('delete' , [ProductController::class , 'delete'])->name('Product.delete');
 });
+Route::get('/login',[AuthController::class,'showFormLogin'])->name('auth.showFormLogin');
+Route::get('/register',[AuthController::class,'showFormRegister'])->name('auth.showFormRegister');
+Route::post('/login',[AuthController::class,'login'])->name('auth.login');
+Route::post('/register',[AuthController::class,'register'])->name('auth.register');
+
+Route::get('/forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('auth.showForgetPassword');
+Route::post('/forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('auth.forgetPassword');
+Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('auth.showFormResetPassword');
+Route::post('/reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('auth.resetPassword');
+
+Route::middleware('auth')->group(function (){
+    Route::get('dashboard',function (){
+        return view('index');
+    })->name('user.dashboard');
+    Route::get('logout',[AuthController::class,'logout'])->name('auth.logout');
+});
+
 
 Route::prefix('cart')->group(function (){
     Route::get('/add' , [CartController::class , 'add'])->name('cart.add');
@@ -37,3 +59,4 @@ Route::prefix('cart')->group(function (){
     Route::get('/delete-cart' , [CartController::class , 'delete'] )->name('cart.delete');
     Route::get('/update' , [CartController::class , 'update'])->name('cart.update');
 });
+
