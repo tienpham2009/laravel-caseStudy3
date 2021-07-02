@@ -34,8 +34,11 @@
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!-- fontawesome -->
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+          integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    <link rel="stylesheet" href="{{ asset('css/my/my.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 </head>
 
@@ -50,10 +53,12 @@
         <div class="container">
             <!-- Start Header Navigation -->
             <div class="navbar-header">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu" aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-menu"
+                        aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="{{ route('index') }}"><img src="{{ asset('storage/images/logo.png') }}" class="logo" alt=""></a>
+                <a class="navbar-brand" href="{{ route('index') }}"><img src="{{ asset('storage/images/logo.png') }}"
+                                                                         class="logo" alt=""></a>
             </div>
             <!-- End Header Navigation -->
 
@@ -62,21 +67,10 @@
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                     <li class="nav-item active"><a class="nav-link" href="{{ route('index') }}">Home</a></li>
                     <li class="dropdown">
-                        <a href="{{ route('Product.show') }}" class="nav-link " >SHOP</a>
+                        <a href="{{ route('Product.show') }}" class="nav-link ">SHOP</a>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Manager Shop</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ route('Product.create') }}">Add Fruit</a></li>
-                            <li><a href="shop-detail.html">Shop Detail</a></li>
-                            <li><a href="cart.html">Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                            <li><a href="my-account.html">My Account</a></li>
-                            <li><a href="wishlist.html">Wishlist</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -88,7 +82,7 @@
                     <li class="side-menu">
                         <a href="#">
                             <i class="fa fa-shopping-bag"></i>
-                            <span class="badge">3</span>
+                            <span  id="count-cart" class="badge">{{ count(session()->get('cart')->items) }}</span>
                             <p>My Cart</p>
                         </a>
                     </li>
@@ -100,26 +94,12 @@
         <div class="side">
             <a href="#" class="close-side"><i class="fa fa-times"></i></a>
             <li class="cart-box">
-                <ul class="cart-list">
+                <ul class="cart">
                     <li>
-                        <a href="#" class="photo"><img src="{{ asset('storage/images/img-pro-01.jpg') }}" class="cart-thumb" alt="" /></a>
-                        <h6><a href="#">Delica omtantur </a></h6>
-                        <p>1x - <span class="price">$80.00</span></p>
+                        <a href="{{ route('cart.show') }}" class="btn hvr-hover" type="button" style="text-align: center">View Cart</a>
                     </li>
-                    <li>
-                        <a href="#" class="photo"><img src="{{ asset('storage/images/img-pro-02.jpg') }}" class="cart-thumb" alt="" /></a>
-                        <h6><a href="#">Omnes ocurreret</a></h6>
-                        <p>1x - <span class="price">$60.00</span></p>
-                    </li>
-                    <li>
-                        <a href="#" class="photo"><img src="{{ asset('storage/images/img-pro-03.jpg') }}" class="cart-thumb" alt="" /></a>
-                        <h6><a href="#">Agam facilisis</a></h6>
-                        <p>1x - <span class="price">$40.00</span></p>
-                    </li>
-                    <li class="total">
-                        <a href="#" class="btn btn-default hvr-hover btn-cart">VIEW CART</a>
-                        <span class="float-right"><strong>Total</strong>: $180.00</span>
-                    </li>
+                </ul>
+                <ul class="cart-list" >
                 </ul>
             </li>
         </div>
@@ -149,6 +129,8 @@
 {{--</div>--}}
 <!-- End copyright  -->
 
+<script src="{{ asset('js/my/my.js') }}"></script>
+<script src=//code.jquery.com/jquery-3.5.1.slim.min.js integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
 
 <!-- ALL JS FILES -->
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>

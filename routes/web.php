@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () { return view('index');})->name('index');
+Route::get('/', [ProductController::class , 'user'])->name('index');
 
 
 Route::get('admin' , function (){
@@ -28,4 +29,11 @@ Route::prefix('Product')->group(function () {
     Route::get('{id}/edit' , [ProductController::class , 'edit'])->name('Product.edit');
     Route::post('{id}/update' , [ProductController::class , 'update'])->name('Product.update');
     Route::get('delete' , [ProductController::class , 'delete'])->name('Product.delete');
+});
+
+Route::prefix('cart')->group(function (){
+    Route::get('/add' , [CartController::class , 'add'])->name('cart.add');
+    Route::get('/' , [CartController::class , 'show'])->name('cart.show');
+    Route::get('/delete-cart' , [CartController::class , 'delete'] )->name('cart.delete');
+    Route::get('/update' , [CartController::class , 'update'])->name('cart.update');
 });

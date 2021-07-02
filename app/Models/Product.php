@@ -20,8 +20,14 @@ class Product extends Model
         'input_date',
         'expiration_date',
         'unit_price',
-        'image'
+        'image',
+        'category_id'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id');
+    }
 
 
 }
