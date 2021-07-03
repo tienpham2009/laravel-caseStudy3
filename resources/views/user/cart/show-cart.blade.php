@@ -21,7 +21,7 @@
                         <table class="table" id="cart">
                             <thead>
                             <tr>
-                                <th><button class="btn btn-cart" id="select-all">Chọn tất cả</button></th>
+                                <th><input type="checkbox" id="checkAll"><span>  Chọn tất cả</span></th>
                                 <th>Images</th>
                                 <th>Product Name</th>
                                 <th>Price</th>
@@ -50,13 +50,13 @@
                                             <p id="unit_price-{{$key}}">{{ $cart['item']->unit_price }}</p>
                                         </td>
                                         <td class="">
-                                            <button id="" onclick="increment({{$key}})" class="btn hvr" style="background-color: rgb(176, 180, 53)">+</button>
+                                            <button id=""  onclick="increment({{$key}})" class="btn hvr" style="background-color: rgb(176, 180, 53)">+</button>
                                             <input type="number"  size="2"
                                                                         value="{{ $cart['quantity'] }}" min="0"
                                                                         step="1"
                                                                         id="amount-{{$key}}"
                                                                         class="text-center ">
-                                            <button id="reduction-{{$key}}" onclick="reduction({{$key}})" class="btn hvr" style="background-color: rgb(176, 180, 53)">-</button>
+                                            <button id="" onclick="reduction({{$key}})" class="btn hvr" style="background-color: rgb(176, 180, 53)">-</button>
                                         </td>
                                         <td class="total-pr">
                                             <p id="price-{{$key}}">{{ $cart['price'] }}</p>

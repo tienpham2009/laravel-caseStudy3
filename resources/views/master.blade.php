@@ -72,17 +72,6 @@
                     <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{route('auth.logout')}}">Log out</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Manager Shop</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="{{ route('Product.create') }}">Add Fruit</a></li>
-                            <li><a href="shop-detail.html">Shop Detail</a></li>
-                            <li><a href="cart.html">Cart</a></li>
-                            <li><a href="checkout.html">Checkout</a></li>
-                            <li><a href="my-account.html">My Account</a></li>
-                            <li><a href="wishlist.html">Wishlist</a></li>
-                        </ul>
-                    </li>
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
@@ -91,10 +80,14 @@
             <div class="attr-nav">
                 <ul>
                     <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                    <li class="side-menu">
-                        <a href="#">
+                    <li class="side-menu" >
+                        <a href="#"  class="">
                             <i class="fa fa-shopping-bag"></i>
+                            @if(session()->has('cart'))
                             <span  id="count-cart" class="badge">{{ count(session()->get('cart')->items) }}</span>
+                            @else
+                                <span  id="count-cart" class="badge"></span>
+                            @endif
                             <p>My Cart</p>
                         </a>
                     </li>

@@ -18,10 +18,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', function (){
-    return redirect()->route('user.dashboard');
-})->name('home');
+//Route::get('/', function (){
+//    return redirect()->route('user.dashboard');
+//})->name('home');
 
+Route::get('/' , [ProductController::class , 'user'])->name('index');
 
 Route::get('admin' , function (){
     return view('admin.master');
