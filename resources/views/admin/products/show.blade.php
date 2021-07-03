@@ -95,5 +95,5 @@
             </form>
         </div><!-- /.container-fluid -->
     </section>
-    <script src="{{ asset('js/my/my.js') }}"></script>
+    <script src="{{ asset('js/my/cart.js') }}"></script>
 @endsection

@@ -42,6 +42,7 @@ class ProductService
         } else {
             $fileExtension = $file->getClientOriginalExtension();
             $fileName = Carbon::now()->format("Y-m-d H:i:s");
+            $fileName = str_replace(' ','-',$fileName);
             $newFileName = "$fileName.$fileExtension";
 
             $request->file("image")->storeAs('public/productImage', $newFileName);
@@ -79,6 +80,7 @@ class ProductService
         } else {
             $fileExtension = $file->getClientOriginalExtension();
             $fileName = Carbon::now()->format("Y-m-d H:i:s");
+            $fileName = str_replace(' ','-',$fileName);
             $newFileName = "$fileName.$fileExtension";
 
             $request->file("image")->storeAs('public/productImage', $newFileName);
@@ -96,5 +98,18 @@ class ProductService
     public function getCategory()
     {
         return Category::all();
+    }
+
+    public function getByCate($category_id)
+    {
+        return $this->productRepository->getByCate($category_id);
+    }
+
+    public function filterPrice($prices)
+    {
+        $priceSmall = $prices[0];
+        $pricesBig = $prices[1];
+
+        return $this->productRepository->filterPrice($priceSmall , $pricesBig);
     }
 }

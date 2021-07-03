@@ -21,13 +21,13 @@ class ProductController
     public function index()
     {
         $products = $this->productService->getAll();
-        return view('admin.products.show' , compact('products'));
+        return view('admin.products.show', compact('products'));
     }
 
     public function create()
     {
         $categories = $this->productService->getCategory();
-        return view('admin.products.create' , compact('categories'));
+        return view('admin.products.create', compact('categories'));
     }
 
     public function store(ProductRequest $productRequest)
@@ -39,19 +39,19 @@ class ProductController
     public function detail($id)
     {
         $product = $this->productService->getById($id);
-        return view('admin.products.detail' , compact('product'));
+        return view('admin.products.detail', compact('product'));
     }
 
     public function edit($id)
     {
         $product = $this->productService->getById($id);
         $categories = $this->productService->getCategory();
-        return view('admin.products.edit' , compact('product' , 'categories'));
+        return view('admin.products.edit', compact('product', 'categories'));
     }
 
-    public function update(UpdateProductRequest $productRequest , $id)
+    public function update(UpdateProductRequest $productRequest, $id)
     {
-        $this->productService->update($productRequest , $id);
+        $this->productService->update($productRequest, $id);
         return redirect()->route('Product.show');
 
     }
@@ -66,11 +66,44 @@ class ProductController
     public function user()
     {
         $products = $this->productService->getAll();
-        return view('index' , compact('products'));
+        $data = [
+            'status' => 'success',
+            'data' => $products
+        ];
+        return response()->json($data);
+
+
     }
 
+    public function filterByCate(Request $request)
+    {
+        $category_id = $request->category_id;
+        $products = $this->productService->getByCate($category_id);
+        $data = [
+            'status' => 'success',
+            'data' => $products
+        ];
 
+        return response()->json($data);
 
+    }
+
+    public function show()
+    {
+        $products = $this->productService->getAll();
+        return view('index', compact('products'));
+    }
+
+    public function filterPrice(Request $request)
+    {
+        $prices = $request->prices;
+        $products = $this->productService->filterPrice($prices);
+        $data = [
+            'status' => 'success',
+            'data' => $products
+        ];
+        return response()->json($data);
+    }
 
 
 }

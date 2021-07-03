@@ -39,6 +39,7 @@
     <link rel="stylesheet" href="{{ asset('css/my/my.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src=//code.jquery.com/jquery-3.5.1.slim.min.js integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
 
 </head>
 
@@ -133,9 +134,11 @@
 {{--        <a href="https://html.design/">html design</a></p>--}}
 {{--</div>--}}
 <!-- End copyright  -->
+<script src="{{ asset('js/my/cart.js') }}"></script>
 
-<script src="{{ asset('js/my/my.js') }}"></script>
-<script src=//code.jquery.com/jquery-3.5.1.slim.min.js integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
+<script src="{{ asset('js/my/show.js') }}"></script>
+
+
 
 <!-- ALL JS FILES -->
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
