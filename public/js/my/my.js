@@ -16,6 +16,7 @@ $(document).ready(function () {
                 success: function () {
                     for (let i = 0; i < id.length; i++) {
                         $('#delete-' + id[i]).remove()
+                        $('#checkAll').prop('checked' , false)
                     }
                 },
 
@@ -23,12 +24,13 @@ $(document).ready(function () {
                     //
                 }
             });
-            $('#delete-cart').attr('data-dismiss' , 'modal')
+            $('#delete-cart').attr('data-dismiss', 'modal')
         }
 
 
     });
-
+});
+$(document).ready(function () {
     $('body').on('click', '.side-menu', function () {
         let id = $(this).attr('id')
         $.ajax({
@@ -40,6 +42,7 @@ $(document).ready(function () {
                 let carts = res.items;
                 let html = '';
                 let count_cart = Object.keys(carts).length;
+                console.log(count_cart)
                 $.each(carts, function (index, item) {
                     if (item) {
                         html += '<li>'
@@ -61,21 +64,18 @@ $(document).ready(function () {
         });
     });
 
-    $('#select-all').click(function () {
-        let status_input = $('.select').is(':checked');
-        if (status_input !== true) {
-            $('.select').attr('checked', true);
-        } else {
-            $('.select').attr('checked', false);
-        }
-    })
+    $('#checkAll').click(function(){
+        $('input:checkbox').not(this).prop('checked', this.checked);
+    });
+});
 
-
-})
 
 function increment(key) {
-    let amount = $('#amount-' + key).val();
+    let amount = parseInt($('#amount-' + key).val());
     amount++;
+    if (amount <= 0 ){
+         amount = 0;
+    }
     $.ajax({
         type: 'GET',
         url: origin + '/cart/update',
@@ -87,17 +87,12 @@ function increment(key) {
         success: function (res) {
             let carts = res.items;
             $.each(carts, function (index, item) {
-                if (item) {
-                    if (amount > 0) {
-                        $('#unit_price-' + key).html(item.item.unit_price)
-                        $('#price-' + key).html(item.price)
-                    } else {
-                        $('#unit_price-' + key).html(item.item.unit_price)
-                    }
-
+                if (index == key){
+                    $('#price-' + key).html(item.price)
+                    $('#amount-' + key).val(amount)
                 }
             })
-            $('#amount-' + key).val(amount)
+
         },
 
         error: function () {
@@ -107,8 +102,11 @@ function increment(key) {
 }
 
 function reduction(key) {
-    let amount = $('#amount-' + key).val();
+    let amount = parseInt($('#amount-' + key).val());
     amount--;
+    if (amount <= 0 ){
+        amount = 0;
+    }
     $.ajax({
             type: 'GET',
             url: origin + '/cart/update',
@@ -121,15 +119,9 @@ function reduction(key) {
                 let carts = res.items;
                 $.each(carts, function (index, item) {
                     if (item) {
-                        if (amount > 0) {
-                            $('#unit_price-' + key).html(item.item.unit_price)
+                        if (index == key){
                             $('#price-' + key).html(item.price)
                             $('#amount-' + key).val(amount)
-                        } else {
-                            $('#price-' + key).html(0)
-                            $('#unit_price-' + key).html(item.item.unit_price)
-                            $('#amount-' + key).val(0)
-
                         }
 
                     }
@@ -142,4 +134,5 @@ function reduction(key) {
             }
         }
     )
+
 }
