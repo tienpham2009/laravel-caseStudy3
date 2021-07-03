@@ -86,7 +86,7 @@
                         <div class="product-categorie-box">
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
-                                    <div class="row">
+                                    <div class="row filter-data">
                                         @forelse($products as $product)
                                         <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                             <div class="products-single fix">
@@ -140,22 +140,29 @@
                             </div>
                             <div class="list-group list-group-collapse list-group-sm list-group-tree"
                                  id="list-group-men" data-children=".sub-men">
+                                <li>
+                                    <p id="show-all"  class="list-group-item list-group-item-action filter">Tất cả danh mục
+                                        </p>
+                                </li>
                                 @foreach($products as $product)
-                                <a href="#" class="list-group-item list-group-item-action">{{ $product->category->name }}
-                                       ({{ $product->amount }})</a>
+                                    <li>
+                                        <p onclick="filterCate({{$product->category_id}})"  class="list-group-item list-group-item-action filter">{{ $product->category->name }}
+                                            ({{ $product->amount }})</p>
+                                    </li>
+
                                 @endforeach
                             </div>
                         </div>
                         <div class="filter-price-left">
                             <div class="title-left">
-                                <h3>Price</h3>
+                                <h3 >Price</h3>
                             </div>
                             <div class="price-box-slider">
                                 <div id="slider-range"></div>
                                 <p>
                                     <input type="text" id="amount" readonly
                                            style="border:0; color:#fbb714; font-weight:bold;">
-                                    <button class="btn hvr-hover" type="submit">Filter</button>
+                                    <button class="btn hvr-hover" type="submit" id="filter-price">Filter</button>
                                 </p>
                             </div>
                         </div>
@@ -164,4 +171,6 @@
             </div>
         </div>
     </div>
+
 @endsection
+

@@ -22,7 +22,10 @@ use Illuminate\Support\Facades\Route;
 //    return redirect()->route('user.dashboard');
 //})->name('home');
 
-Route::get('/' , [ProductController::class , 'user'])->name('index');
+Route::get('/' , [ProductController::class , 'show'])->name('index');
+Route::get('/filterCate' , [ProductController::class , 'filterByCate'])->name('filterByCate');
+Route::get('/show' , [ProductController::class , 'user'])->name('user');
+Route::get('/filterPrice' , [ProductController::class , 'filterPrice'])->name('filterPrice');
 
 Route::get('admin' , function (){
     return view('admin.master');

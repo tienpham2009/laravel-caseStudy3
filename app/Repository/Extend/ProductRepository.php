@@ -11,7 +11,17 @@ class ProductRepository extends Repository
 {
     public function getModel()
     {
-       return Product::class;
+        return Product::class;
+    }
+
+    public function getByCate($category_id)
+    {
+       return $this->model->where('category_id' , $category_id)->get();
+    }
+
+    public function filterPrice($priceSmall , $priceBig)
+    {
+        return $this->model->whereBetween('unit_price' , [$priceSmall , $priceBig])->get();
     }
 
 
