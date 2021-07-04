@@ -58,9 +58,9 @@ class ProductController
 
     public function delete(Request $request)
     {
-        $data = $request->data;
-        $this->productService->destroy($data);
-        return redirect()->route('Product.show');
+        $ids = $request->id;
+        $this->productService->destroy($ids);
+
     }
 
     public function user()
@@ -103,6 +103,12 @@ class ProductController
             'data' => $products
         ];
         return response()->json($data);
+    }
+
+    public function detailProduct($id)
+    {
+        $product = $this->productService->getById($id);
+        return view('user.detail', compact('product'));
     }
 
 

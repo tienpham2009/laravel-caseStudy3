@@ -13,7 +13,7 @@
                                   action="{{ route('Product.update' , $product->id)}}">
                                 @csrf
                                 <div class="form-group">
-                                    <img src="{{ asset('storage/productImage/' . $product->image) }}">
+                                    <img style="width: 500px ; height: 400px" src="{{ asset('storage/productImage/' . $product->image) }}">
                                 </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Tên trái cây</label>
@@ -40,40 +40,29 @@
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
                                 <div class="form-group">
-                                    <label for="exampleFormControlInput1">Ngày nhập kho</label>
+                                    <label for="exampleFormControlInput1">Ngày sản xuất</label>
                                     <input type="date" class="form-control @error('input_date') is-invalid @enderror"
-                                           name="input_date" value="{{ $product->input_date }}">
+                                           name="input_date" value="{{ old('input_date') }}">
                                 </div>
                                 @error('input_date')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
                                 <div class="form-group">
-                                    <label for="exampleFormControlInput1">Ngày hết hạn</label>
-                                    <input type="date"
-                                           class="form-control @error('expiration_date') is-invalid @enderror"
-                                           name="expiration_date" value="{{ $product->expiration_date	 }}">
+                                    <label for="exampleFormControlInput1">Hạn sử dụng (ngày)</label>
+                                    <input type="text" class="form-control @error('expiry_date') is-invalid @enderror"
+                                           name="expiry_date" value="{{ old('expiry_date') }}">
                                 </div>
-                                <div class="form-group row">
-                                    <div class="col-6">
-                                        <label for="exampleFormControlInput1">Danh mục</label>
-                                        <select class="form-control" name="category_id">
-                                            @foreach($categories as $category)
-                                                <option value="{{$category->id}}">{{ $category->name }}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-                                    <div class="col-6">
-                                        <label for="exampleFormControlInput1">Danh mục khác</label>
-                                        <input type="text" class="form-control @error('origin') is-invalid @enderror"
-                                               name="new_category" value="{{ old('new_category') }}">
-                                        @error('new_category')
-                                        <p class="text-danger">{{ $message }}</p>
-                                        @enderror
-                                    </div>
-                                </div>
-                                @error('expiration_date')
+                                @error('expiry_date')
                                 <p class="text-danger">{{ $message }}</p>
                                 @enderror
+                                <div class="form-group">
+                                    <label for="exampleFormControlInput1">Danh mục</label>
+                                    <select class="form-control" name="category_id">
+                                        @foreach($categories as $category)
+                                            <option value="{{$category->id}}">{{ $category->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
                                 <div class="form-group">
                                     <label for="exampleFormControlInput1">Số lượng</label>
                                     <input type="text" class="form-control @error('amount') is-invalid @enderror"
@@ -113,7 +102,8 @@
                                         <button type="submit" class="btn btn-primary">Cập nhập</button>
                                     </div>
                                     <div class="form-group col-6">
-                                        <a href="{{ route('Product.show') }}" type="submit" class="btn btn-success">Quay Lại</a>
+                                        <a href="{{ route('Product.show') }}" type="submit" class="btn btn-success">Quay
+                                            Lại</a>
                                     </div>
                                 </div>
 

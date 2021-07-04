@@ -3,6 +3,11 @@
     height: 255px;
 }
 
+
 table #cart th td{
     align-content: center;
+}
+
+table{
+    text-align: center;
 }

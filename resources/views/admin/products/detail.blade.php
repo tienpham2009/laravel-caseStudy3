@@ -7,7 +7,7 @@
                 <div class="col-xl-5 col-lg-5 col-md-6">
                     <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
                         <div class="carousel-inner" role="listbox">
-                            <div class="carousel-item active"><img class="d-block w-100"
+                            <div class="carousel-item active"><img class="d-block w-100" style="width: 500px ; height: 400px"
                                                                    src="{{ asset('storage/productImage/'.$product->image) }}"
                                                                    alt="First slide"></div>
                         </div>

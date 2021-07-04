@@ -29,13 +29,6 @@ class ProductService
         $product  = new Product();
         $product->fill($request->all());
 
-        $category = new Category();
-        if ($request->new_category != null){
-            $category->name = $request->new_category;
-            $category->save();
-        }
-        $product->category_id = $category->max('id');
-
         $file = $request->image;
         if (!$request->hasFile('image')) {
             $product->image = asset('storage/productImage/default.jpg');
@@ -50,8 +43,10 @@ class ProductService
 
         }
         $expiry_date = $request->expiry_date;
-        $product->input_date = date("Y-m-d");
-        $product->expiration_date = date('Y-m-d', strtotime("+".$expiry_date." day"));
+        $product->input_date = $request->input_date;
+        $product->expiration_date = strtotime("+".$expiry_date." day", strtotime($product->input_date));
+        $product->expiration_date = date('Y-m-d' , $product->expiration_date);
+
         $this->productRepository->create($product);
     }
 
@@ -67,13 +62,6 @@ class ProductService
         $oldFile = $product->image;
         $product->fill($request->all());
 
-        $category = new Category();
-        if ($request->new_category != null){
-            $category->name = $request->new_category;
-            $category->save();
-        }
-        $product->category_id = $category->max('id');
-
         $file = $request->image;
         if (!$request->hasFile('image')) {
             $product->image = $oldFile;
@@ -86,6 +74,10 @@ class ProductService
             $request->file("image")->storeAs('public/productImage', $newFileName);
             $product->image = $newFileName;
         }
+        $expiry_date = $request->expiry_date;
+        $product->input_date = $request->input_date;
+        $product->expiration_date = strtotime("+".$expiry_date." day", strtotime($product->input_date));
+        $product->expiration_date = date('Y-m-d' , $product->expiration_date);
         $this->productRepository->update($product);
 
     }
