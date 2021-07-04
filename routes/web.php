@@ -26,6 +26,8 @@ Route::get('/' , [ProductController::class , 'show'])->name('index');
 Route::get('/filterCate' , [ProductController::class , 'filterByCate'])->name('filterByCate');
 Route::get('/show' , [ProductController::class , 'user'])->name('user');
 Route::get('/filterPrice' , [ProductController::class , 'filterPrice'])->name('filterPrice');
+Route::get('{id}/detail' , [ProductController::class , 'detailProduct'])->name('detailProduct');
+
 
 Route::get('admin' , function (){
     return view('admin.master');

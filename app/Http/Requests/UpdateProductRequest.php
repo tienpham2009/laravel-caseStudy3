@@ -29,10 +29,9 @@ class UpdateProductRequest extends FormRequest
             'unit' => 'required',
             'origin' => 'required|string',
             'input_date' => 'required|date_format:Y-m-d',
-            'expiration_date' => 'required|date_format:Y-m-d',
+            'expiry_date' => 'required|numeric',
             'amount' => 'required|numeric',
             'unit_price' => 'required|numeric',
-            'new_category' => 'unique:categories,name'
         ];
     }
 
@@ -50,8 +49,9 @@ class UpdateProductRequest extends FormRequest
             'input_date.required' => 'Không được để trống',
             'input_date.date_format' => 'Không đúng dịnh dạng',
             'expiration_date.required' => 'Không được để trống',
-            'expiration_date.date_format' => 'Không đúng dịnh dạng',
-            'new_category.unique' => 'Danh mục đã tồn tại'
+            'expiry_date.required' => 'Không được để trống',
+            'expiry_date.numeric'=>'Hạn sử dụng phải là số',
+
         ];
     }
 }

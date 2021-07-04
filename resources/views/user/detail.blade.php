@@ -23,19 +23,19 @@
                         <p>{{ $product->unit }}</p>
                         <h4>Xuất xứ</h4>
                         <p>{{ $product->origin }}</p>
-                        <h4>Ngày nhập kho:</h4>
-                        <p>{{ $product->input_date }}</p>
-                        <h4>Ngày hết hạn:</h4>
-                        <p>{{ $product->expiration_date	 }}</p>
-                        <h4>Số lượng ({{ $product->unit }}):</h4>
-                        <p>{{ $product->amount }}</p>
+{{--                        <h4>Ngày nhập kho:</h4>--}}
+{{--                        <p>{{ $product->input_date }}</p>--}}
+{{--                        <h4>Ngày hết hạn:</h4>--}}
+{{--                        <p>{{ $product->expiration_date	 }}</p>--}}
+{{--                        <h4>Số lượng ({{ $product->unit }}):</h4>--}}
+{{--                        <p>{{ $product->amount }}</p>--}}
                     </div>
                     <div class="row">
                         <div class="carousel-inner col-3">
-                            <a class="btn hvr-hover" href="{{ route('Product.edit' , $product->id) }}">Cập Nhập</a>
+                            <button class="cart add-cart side-menu btn hvr-hover"  id="{{ $product->id }}">Add to Cart</button>
                         </div>
                         <div class="carousel-inner col-6">
-                            <a class="btn hvr-hover" href="{{ route('Product.show') }}">Quay lại</a>
+                            <a class="btn hvr-hover" href="{{ route('index') }}">Quay lại</a>
                         </div>
                     </div>
 

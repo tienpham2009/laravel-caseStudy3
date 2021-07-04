@@ -38,6 +38,7 @@ abstract class Repository
 
     public function create($object)
     {
+
        DB::beginTransaction();
         try {
             $object->save();

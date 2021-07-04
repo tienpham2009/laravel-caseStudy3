@@ -1,14 +1,14 @@
-function show(res){
+function show(res) {
     let data = res.data
     let html = '';
-    $.each(data , function (index  , item){
+    $.each(data, function (index, item) {
         html += '<div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">\n' +
             '                                            <div class="products-single fix">\n' +
             '                                                <div class="box-img-hover image-product">\n' +
             '                                                    <div class="type-lb">\n' +
             '                                                        <p class="sale">Sale</p>\n' +
             '                                                    </div>\n' +
-            '                                                    <img src="'+ origin + '/storage/productImage/'+item.image+'" class="img-fluid" alt="Image">\n' +
+            '                                                    <img src="' + origin + '/storage/productImage/' + item.image + '" class="img-fluid" alt="Image">\n' +
             '                                                    <div class="mask-icon">\n' +
             '                                                        <ul>\n' +
             '                                                            <li><a href="#" data-toggle="tooltip" data-placement="right"\n' +
@@ -20,12 +20,12 @@ function show(res){
             '                                                                   title="Add to Wishlist"><i class="far fa-heart"></i></a>\n' +
             '                                                            </li>\n' +
             '                                                        </ul>\n' +
-            '                                                        <button class="cart add-cart side-menu"  id="'+item.id+'">Add to Cart</button>\n' +
+            '                                                        <button class="cart add-cart side-menu"  id="' + item.id + '">Add to Cart</button>\n' +
             '                                                    </div>\n' +
             '                                                </div>\n' +
             '                                                <div class="why-text">\n' +
-            '                                                    <h4>'+item.name+'</h4>\n' +
-            '                                                    <h5>'+item.unit_price+'</h5>\n' +
+            '                                                    <h4>' + item.name + '</h4>\n' +
+            '                                                    <h5>' + item.unit_price + '</h5>\n' +
             '                                                </div>\n' +
             '                                            </div>\n' +
             '                                        </div>'
@@ -33,6 +33,7 @@ function show(res){
 
     $('.filter-data').html(html);
 }
+
 let origin = location.origin
 
 $(document).ready(function () {
@@ -54,7 +55,7 @@ $(document).ready(function () {
                 success: function () {
                     for (let i = 0; i < id.length; i++) {
                         $('#delete-' + id[i]).remove()
-                        $('#checkAll').prop('checked' , false)
+                        $('#checkAll').prop('checked', false)
                     }
                 },
 
@@ -102,45 +103,78 @@ $(document).ready(function () {
         });
     });
 
-    // chuc nang chon tat ca
-    $('#checkAll').click(function(){
+    // chuc nang chon tat ca gio hang
+    $('#checkAll').click(function () {
+        $('input:checkbox').not(this).prop('checked', this.checked);
+    });
+
+    // chuc nang chon tat ca san pham
+    $('#select-all').click(function () {
         $('input:checkbox').not(this).prop('checked', this.checked);
     });
 
     // chuc nang loc theo gia
-    $('#filter-price').click(function (){
-        let prices = $('#slider-range').slider('option' , 'values');
+    $('#filter-price').click(function () {
+        let prices = $('#slider-range').slider('option', 'values');
         $.ajax({
             type: 'GET',
             url: origin + '/filterPrice',
-            data:{
-                prices:prices
+            data: {
+                prices: prices
             },
 
-            success: function (res){
+            success: function (res) {
                 show(res)
             },
 
-            error:function (){
+            error: function () {
 
             }
         })
     })
 
     //chuc nang show tat ca san pham
-    $('body').on('click' , '#show-all' , function (){
+    $('body').on('click', '#show-all', function () {
         $.ajax({
-            type:'GET',
-            url:origin + '/show',
+            type: 'GET',
+            url: origin + '/show',
 
-            success: function (res){
+            success: function (res) {
                 show(res)
             },
 
-            error:function (){
+            error: function () {
 
             }
         });
+    })
+
+    // chuc nang xoa san pham
+    $('body').on('click', '#delete-product', function () {
+        let id = [];
+        $(':checkbox:checked').each(function (i) {
+            id[i] = $(this).val();
+        });
+        if (id.length === 0) {
+            $('#content').html('Chọn sản phẩm bạn muốn xóa !');
+        } else {
+            $.ajax({
+                type: 'GET',
+                url: origin + '/Product/delete',
+                data: {id: id},
+
+                success: function () {
+                    for (let i = 0; i < id.length; i++) {
+                        $('#delete-product-' + id[i]).remove()
+                        $('#select-all').prop('checked', false)
+                    }
+                },
+
+                error: function () {
+                    //
+                }
+            });
+        }
     })
 });
 
@@ -148,7 +182,7 @@ $(document).ready(function () {
 function increment(key) {
     let amount = parseInt($('#amount-' + key).val());
     amount++;
-    if (amount <= 0 ){
+    if (amount <= 0) {
         amount = 0;
     }
     $.ajax({
@@ -162,7 +196,7 @@ function increment(key) {
         success: function (res) {
             let carts = res.items;
             $.each(carts, function (index, item) {
-                if (index == key){
+                if (index == key) {
                     $('#price-' + key).html(item.price)
                     $('#amount-' + key).val(amount)
                 }
@@ -180,7 +214,7 @@ function increment(key) {
 function reduction(key) {
     let amount = parseInt($('#amount-' + key).val());
     amount--;
-    if (amount <= 0 ){
+    if (amount <= 0) {
         amount = 0;
     }
     $.ajax({
@@ -195,7 +229,7 @@ function reduction(key) {
                 let carts = res.items;
                 $.each(carts, function (index, item) {
                     if (item) {
-                        if (index == key){
+                        if (index == key) {
                             $('#price-' + key).html(item.price)
                             $('#amount-' + key).val(amount)
                         }
@@ -215,19 +249,19 @@ function reduction(key) {
 
 
 // chuc nang loc theo danh muc
-function filterCate(category_id){
+function filterCate(category_id) {
     $.ajax({
-        type:'GET',
-        url:origin + '/filterCate',
-        data:{
-            category_id:category_id
+        type: 'GET',
+        url: origin + '/filterCate',
+        data: {
+            category_id: category_id
         },
 
-        success: function (res){
+        success: function (res) {
             show(res)
         },
 
-        error:function (){
+        error: function () {
 
         }
     });

@@ -30,9 +30,9 @@ class ProductRequest extends FormRequest
             'origin' => 'required|regex:/[A-Za-z]/',
             'expiry_date' => 'required|numeric',
             'amount' => 'required|numeric',
+            'input_date'=> 'required',
             'unit_price' => 'required|numeric',
             'image' => 'required',
-            'new_category'=>'unique:categories,name'
         ];
     }
 
@@ -50,7 +50,7 @@ class ProductRequest extends FormRequest
             'image.required' => 'Không được để trống',
             'expiry_date.required' => 'Không được để trống',
             'expiry_date.numeric'=>'Hạn sử dụng phải là số',
-            'new_category.unique'=>'Danh mục đã tồn tại'
+            'input_date.required'=>'Không được để trống'
         ];
     }
 }
