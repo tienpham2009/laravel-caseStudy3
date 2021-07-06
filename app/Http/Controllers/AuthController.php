@@ -19,7 +19,6 @@ class AuthController extends Controller
 
     public function login(Request $request): \Illuminate\Http\RedirectResponse
     {
-
         $remember = $request->has('remember');
         $email = $request->email;
         $password = $request->password;
