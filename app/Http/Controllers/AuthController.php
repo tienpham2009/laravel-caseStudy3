@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Models\User;
+use Brian2694\Toastr\Toastr;
+use Brian2694\Toastr\ToastrServiceProvider;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +20,7 @@ class AuthController extends Controller
         return view('login');
     }
 
-    public function login(Request $request): \Illuminate\Http\RedirectResponse
+    public function login(LoginRequest $request): \Illuminate\Http\RedirectResponse
     {
 
         $remember = $request->has('remember');
@@ -28,7 +31,7 @@ class AuthController extends Controller
             'password' => $password
         ];
 
-        if (!Auth::attempt($data)) {
+        if (!Auth::attempt($data,$remember)) {
             session()->flash('login-error', 'Tài khoản hoặc mật khẩu không chính xác');
             return redirect()->route('auth.showFormLogin');
         }
@@ -64,7 +67,7 @@ class AuthController extends Controller
         ];
         $check = $this->create($data);
         if ($check) {
-            Session::flash('register-success', 'Đăng ký thành công');
+            Session::flash('message', 'Đăng ký thành công');
         }
         return redirect()->route('auth.showFormLogin');
     }

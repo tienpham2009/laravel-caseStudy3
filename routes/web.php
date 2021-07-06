@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\LoginWithFacebookController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
