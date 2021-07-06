@@ -17,20 +17,22 @@ class AuthController extends Controller
         return view('login');
     }
 
-    public function login(Request $request)
+    public function login(Request $request): \Illuminate\Http\RedirectResponse
     {
-        $remember= $request->has('remember');
+
+        $remember = $request->has('remember');
         $email = $request->email;
         $password = $request->password;
         $data = [
             'email' => $email,
             'password' => $password
         ];
-        if (Auth::attempt($data,$remember)) {
-            return redirect()->route('user.dashboard');
+
+        if (!Auth::attempt($data)) {
+            session()->flash('login-error', 'Tài khoản hoặc mật khẩu không chính xác');
+            return redirect()->route('auth.showFormLogin');
         }
-        session()->flash('login-error', 'Tài khoản hoặc mật khẩu không chính xác');
-        return redirect()->route('auth.showFormLogin');
+        return redirect()->route('index');
     }
 
     public function showFormRegister()
@@ -50,26 +52,29 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $name =$request->name;
-        $password =$request->password;
-        $email=$request->email;
-        $address =$request->address;
+        $name = $request->name;
+        $password = $request->password;
+        $email = $request->email;
+        $address = $request->address;
         $data = [
-            'name'=>$name,
+            'name' => $name,
             'email' => $email,
             'password' => $password,
-            'address'=>$address,
+            'address' => $address,
         ];
-        $check=$this->create($data);
-        if ($check){
-            Session::flash('register-success','Đăng ký thành công');
+        $check = $this->create($data);
+        if ($check) {
+            Session::flash('register-success', 'Đăng ký thành công');
         }
         return redirect()->route('auth.showFormLogin');
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
         return redirect()->route('auth.showFormLogin');
     }
 }
