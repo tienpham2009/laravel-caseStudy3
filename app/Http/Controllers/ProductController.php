@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Category;
 use App\Service\ProductService;
 use Illuminate\Http\Request;
 
@@ -91,7 +92,8 @@ class ProductController
     public function show()
     {
         $products = $this->productService->getAll();
-        return view('index', compact('products'));
+        $categories = Category::all();
+        return view('index', compact('products' , 'categories'));
     }
 
     public function filterPrice(Request $request)

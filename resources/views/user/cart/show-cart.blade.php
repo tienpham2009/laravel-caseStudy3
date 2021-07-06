@@ -49,8 +49,8 @@
                                         <td class="price-pr">
                                             <p id="unit_price-{{$key}}">{{ $cart['item']->unit_price }}</p>
                                         </td>
-                                        <td class="">
-                                            <button id=""  onclick="increment({{$key}})" class="btn hvr" style="background-color: rgb(176, 180, 53)">+</button>
+                                        <td>
+                                            <button id="" data-id="{{ $key }}" onclick="increment({{$key}})" class="btn hvr" style="background-color: rgb(176, 180, 53)">+</button>
                                             <input type="number"  size="2"
                                                                         value="{{ $cart['quantity'] }}" min="0"
                                                                         step="1"
@@ -122,7 +122,11 @@
                         <h3>Order summary</h3>
                         <div class="d-flex">
                             <h4>Sub Total</h4>
-                            <div class="ml-auto font-weight-bold"> $ 130</div>
+                            <div class="ml-auto font-weight-bold"> $
+                                @if(session()->has('cart'))
+                                <span id="sub-total">{{ session()->get('cart')->totalPrice }}</span>
+                                @endif
+                            </div>
                         </div>
                         <div class="d-flex">
                             <h4>Discount</h4>
@@ -144,7 +148,7 @@
                         <hr>
                         <div class="d-flex gr-total">
                             <h5>Grand Total</h5>
-                            <div class="ml-auto h5"> $ 388</div>
+                            <div class="ml-auto h5"> $ <p></p></div>
                         </div>
                         <hr>
                     </div>

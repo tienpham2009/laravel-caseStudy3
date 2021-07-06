@@ -29,5 +29,10 @@ class Product extends Model
         return $this->belongsTo(Category::class, 'category_id');
     }
 
+    public function countByCategory($category_id)
+    {
+        return $this->where('category_id' , $category_id)->count();
+    }
+
 
 }

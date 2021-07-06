@@ -32,6 +32,9 @@ Route::get('{id}/detail' , [ProductController::class , 'detailProduct'])->name('
 Route::get('admin' , function (){
     return view('admin.master');
 });
+
+
+
 Route::prefix('Product')->group(function () {
     Route::get('/' , [ProductController::class , 'index'])->name('Product.show');
     Route::get('create' , [ProductController::class , 'create'])->name('Product.create');
@@ -41,6 +44,9 @@ Route::prefix('Product')->group(function () {
     Route::post('{id}/update' , [ProductController::class , 'update'])->name('Product.update');
     Route::get('delete' , [ProductController::class , 'delete'])->name('Product.delete');
 });
+
+
+
 Route::get('/login',[AuthController::class,'showFormLogin'])->name('auth.showFormLogin');
 Route::get('/register',[AuthController::class,'showFormRegister'])->name('auth.showFormRegister');
 Route::post('/login',[AuthController::class,'login'])->name('auth.login');
@@ -50,6 +56,8 @@ Route::get('/forget-password', [ForgotPasswordController::class, 'showForgetPass
 Route::post('/forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('auth.forgetPassword');
 Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('auth.showFormResetPassword');
 Route::post('/reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('auth.resetPassword');
+
+
 
 Route::middleware('auth')->group(function (){
     Route::get('dashboard',function (){

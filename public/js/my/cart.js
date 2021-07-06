@@ -84,6 +84,7 @@ $(document).ready(function () {
                 console.log(count_cart)
                 $.each(carts, function (index, item) {
                     if (item) {
+                        sub_total = item.price;
                         html += '<li>'
                         html += '<a href="" style="pointer-events: none" class="photo"><img src="http://127.0.0.1:8000/storage/productImage/' + item.item.image + '" class="cart-thumb" alt=""/></a>'
                         html += '<h6><a href="#" style="pointer-events: none">' + item.item.name + '</a></h6>'
@@ -94,6 +95,10 @@ $(document).ready(function () {
                 $('#count-cart').html(count_cart)
                 $('.cart-list').html(html)
                 $('.side').addClass('on')
+
+                setInterval(function (){
+                    $('.side').removeClass('on')
+                } , 5000)
             },
 
 
@@ -176,7 +181,10 @@ $(document).ready(function () {
             });
         }
     })
+
+
 });
+
 
 // chuc nang tang so luong hang
 function increment(key) {
@@ -266,4 +274,6 @@ function filterCate(category_id) {
         }
     });
 }
+
+
 
