@@ -104,4 +104,5 @@ class ProductService
 
         return $this->productRepository->filterPrice($priceSmall , $pricesBig);
     }
+
 }

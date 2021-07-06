@@ -33,6 +33,9 @@ Route::get('{id}/detail' , [ProductController::class , 'detailProduct'])->name('
 Route::get('admin' , function (){
     return view('admin.master');
 });
+
+
+
 Route::prefix('Product')->group(function () {
     Route::get('/' , [ProductController::class , 'index'])->name('Product.show');
     Route::get('create' , [ProductController::class , 'create'])->name('Product.create');
@@ -52,6 +55,8 @@ Route::get('/forget-password', [ForgotPasswordController::class, 'showForgetPass
 Route::post('/forget-password', [ForgotPasswordController::class, 'submitForgetPasswordForm'])->name('auth.forgetPassword');
 Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('auth.showFormResetPassword');
 Route::post('/reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('auth.resetPassword');
+
+
 
 Route::middleware('auth')->group(function (){
 //    Route::get('dashboard',function (){

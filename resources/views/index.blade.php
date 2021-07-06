@@ -144,12 +144,11 @@
                                     <p id="show-all"  class="list-group-item list-group-item-action filter">Tất cả danh mục
                                         </p>
                                 </li>
-                                @foreach($products as $product)
+                                @foreach($categories as $category)
                                     <li>
-                                        <p onclick="filterCate({{$product->category_id}})"  class="list-group-item list-group-item-action filter">{{ $product->category->name }}
-                                            ({{ $product->amount }})</p>
+                                        <p onclick="filterCate({{$category->id}})"  class="list-group-item list-group-item-action filter">{{ $category->name }}
+                                            ({{$category->countProduct($category->id)}})</p>
                                     </li>
-
                                 @endforeach
                             </div>
                         </div>

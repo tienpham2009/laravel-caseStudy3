@@ -16,7 +16,15 @@ class Category extends Model
         'name'
     ];
 
-    public function products(){
-        return $this->hasMany(Product::class, 'category_id' , 'id');
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'category_id', 'id');
+    }
+
+    public function countProduct($id)
+    {
+        return $this->join('products', 'categories.id', '=', 'products.category_id')
+                    ->where('categories.id' , $id)
+                    ->count();
     }
 }

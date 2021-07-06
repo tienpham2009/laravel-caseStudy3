@@ -24,5 +24,4 @@ class ProductRepository extends Repository
         return $this->model->whereBetween('unit_price' , [$priceSmall , $priceBig])->get();
     }
 
-
 }
