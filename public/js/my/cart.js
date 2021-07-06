@@ -81,10 +81,8 @@ $(document).ready(function () {
                 let carts = res.items;
                 let html = '';
                 let count_cart = Object.keys(carts).length;
-                console.log(count_cart)
                 $.each(carts, function (index, item) {
                     if (item) {
-                        sub_total = item.price;
                         html += '<li>'
                         html += '<a href="" style="pointer-events: none" class="photo"><img src="http://127.0.0.1:8000/storage/productImage/' + item.item.image + '" class="cart-thumb" alt=""/></a>'
                         html += '<h6><a href="#" style="pointer-events: none">' + item.item.name + '</a></h6>'
@@ -96,9 +94,10 @@ $(document).ready(function () {
                 $('.cart-list').html(html)
                 $('.side').addClass('on')
 
-                setInterval(function (){
-                    $('.side').removeClass('on')
-                } , 5000)
+
+                // setInterval(function () {
+                //     $('.side').removeClass('on')
+                // }, 5000)
             },
 
 
@@ -182,6 +181,8 @@ $(document).ready(function () {
         }
     })
 
+    // hien modal dang nhap
+
 
 });
 
@@ -203,12 +204,15 @@ function increment(key) {
 
         success: function (res) {
             let carts = res.items;
+            let subTotal = res.totalPrice;
             $.each(carts, function (index, item) {
                 if (index == key) {
                     $('#price-' + key).html(item.price)
                     $('#amount-' + key).val(amount)
                 }
             })
+
+            $('#sub-total').html(subTotal)
 
         },
 
@@ -226,32 +230,34 @@ function reduction(key) {
         amount = 0;
     }
     $.ajax({
-            type: 'GET',
-            url: origin + '/cart/update',
-            data: {
-                key: key,
-                amount: amount
-            },
+        type: 'GET',
+        url: origin + '/cart/update',
+        data: {
+            key: key,
+            amount: amount
+        },
 
-            success: function (res) {
-                let carts = res.items;
-                $.each(carts, function (index, item) {
-                    if (item) {
-                        if (index == key) {
-                            $('#price-' + key).html(item.price)
-                            $('#amount-' + key).val(amount)
-                        }
-
+        success: function (res) {
+            let carts = res.items;
+            let subTotal = res.totalPrice;
+            $.each(carts, function (index, item) {
+                if (item) {
+                    if (index == key) {
+                        $('#price-' + key).html(item.price)
+                        $('#amount-' + key).val(amount)
                     }
-                })
 
-            },
+                }
+            })
+            $('#sub-total').html(subTotal)
+        },
 
-            error: function () {
 
-            }
-        }
-    )
+    error: function () {
+
+    }
+}
+)
 
 }
 
