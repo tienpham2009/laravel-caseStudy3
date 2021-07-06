@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,9 +42,10 @@ Route::prefix('Product')->group(function () {
     Route::post('{id}/update' , [ProductController::class , 'update'])->name('Product.update');
     Route::get('delete' , [ProductController::class , 'delete'])->name('Product.delete');
 });
+
 Route::get('/login',[AuthController::class,'showFormLogin'])->name('auth.showFormLogin');
 Route::get('/register',[AuthController::class,'showFormRegister'])->name('auth.showFormRegister');
-Route::post('/login',[AuthController::class,'login'])->name('auth.login');
+Route::post('/login',[AuthController::class,'login'])->name('login');
 Route::post('/register',[AuthController::class,'register'])->name('auth.register');
 
 Route::get('/forget-password', [ForgotPasswordController::class, 'showForgetPasswordForm'])->name('auth.showForgetPassword');
@@ -52,9 +54,9 @@ Route::get('/reset-password/{token}', [ForgotPasswordController::class, 'showRes
 Route::post('/reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('auth.resetPassword');
 
 Route::middleware('auth')->group(function (){
-    Route::get('dashboard',function (){
-        return view('index');
-    })->name('user.dashboard');
+//    Route::get('dashboard',function (){
+//        return redirect()->route('index');
+//    })->name('user.dashboard');
     Route::get('logout',[AuthController::class,'logout'])->name('auth.logout');
 });
 
@@ -66,3 +68,10 @@ Route::prefix('cart')->group(function (){
     Route::get('/update' , [CartController::class , 'update'])->name('cart.update');
 });
 
+
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+Route::get('auth/google', [GoogleController::class, 'redirectToGoogle'])->name('auth.google');
+Route::get('auth/google/callback', [GoogleController::class, 'handleGoogleCallback'])->name('auth.googleRedirect');
