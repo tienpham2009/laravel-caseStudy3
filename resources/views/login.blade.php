@@ -24,14 +24,13 @@
     <div class="card">
         <div class="card-body login-card-body">
             <p class="login-box-msg">Sign in to start your session</p>
-
-            <form action="{{route('auth.login')}}" method="post">
-                @if(session()->has('login-error'))
-                    {{session('login-error')}}
-                @endif
-                @if(session()->has('register-success'))
-                    {{session('register-success')}}
-                @endif
+            @if(session()->has('login-error'))
+                {{session('login-error')}}
+            @endif
+            @if(session()->has('register-success'))
+                {{session('register-success')}}
+            @endif
+            <form action="{{ route('login') }}" method="post">
                 @csrf
                 <div class="input-group mb-3">
                     <input type="email" class="form-control" name="email" placeholder="Email">
@@ -71,8 +70,8 @@
                 <a href="#" class="btn btn-block btn-primary">
                     <i class="fab fa-facebook mr-2"></i> Sign in using Facebook
                 </a>
-                <a href="#" class="btn btn-block btn-danger">
-                    <i class="fab fa-google-plus mr-2"></i> Sign in using Google+
+                <a href="{{route('auth.google') }}">
+                    <img src="https://developers.google.com/identity/images/btn_google_signin_dark_normal_web.png" style="margin-left: 3em;">
                 </a>
             </div>
             <!-- /.social-auth-links -->

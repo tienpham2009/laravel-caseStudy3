@@ -23,7 +23,9 @@ class ForgotPasswordController extends Controller
         $request->validate([
             'email'=>'required|email|exists:users'
         ]);
+
         $token = Str::random(64);
+
         DB::table('password_resets')->insert([
             'email' => $request->email,
             'token' => $token,
@@ -31,10 +33,11 @@ class ForgotPasswordController extends Controller
         ]);
 
         Mail::send('email.forgetPassword', ['token' => $token], function ($message) use ($request) {
-            $message->from($request->email);
-            $message->to('leeji20081998@gmail.com');
+            $message->from(env('MAIL_USERNAME'));
+            $message->to($request->email);
             $message->subject('Reset Password');
         });
+
         Session::flash('message', "We have e-mailed your password reset link!");
         return redirect()->route('auth.showForgetPassword');
     }
