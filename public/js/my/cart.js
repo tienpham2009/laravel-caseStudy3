@@ -181,10 +181,108 @@ $(document).ready(function () {
         }
     })
 
-    // hien modal dang nhap
 
 
 });
+// hien thi cac tinh
+$(window).on('load', function () {
+    $.ajax({
+        url: 'https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province',
+        method: 'GET',
+        headers: {
+            'token': "d250e2f1-de5e-11eb-9388-d6e0030cbbb7",
+            'Content-Type': 'application/json'
+        },
+        dataType: 'json',
+        success: function (res) {
+            let data  = res.data;
+            let html = '<option value="">-Tỉnh thành-</option>'
+
+            $.each(data , function (index , item){
+                // console.log(item)
+                html += '<option provinceID="'+item.ProvinceID+'" value="'+item.ProvinceName+'">'+item.ProvinceName+'</option>'
+            })
+
+            $('#province').html(html)
+
+
+
+        },
+
+        error: function () {
+
+        }
+    })
+})
+
+// hien thi quan-huyen-phuong-xa
+$(document).ready(function (){
+    // hien thi quan huyen
+    $('body').on('change','#province',function (){
+        let provinceID = $('option:selected' , this ).attr('provinceID');
+        $.ajax({
+            url: 'https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/district',
+            method: 'GET',
+            headers: {
+                'token': "d250e2f1-de5e-11eb-9388-d6e0030cbbb7",
+                'Content-Type': 'application/json'
+            },
+            dataType: 'json',
+            success: function (res) {
+                let data  = res.data;
+                let html = '<option value="">-Quận Huyện-</option>'
+
+                $.each(data , function (index , item){
+                    if (item.ProvinceID == provinceID){
+                        html += '<option districtID="'+item.DistrictID+'" value="'+item.DistrictName+'">'+item.DistrictName+'</option>'
+                    }
+
+                })
+
+                $('#district').html(html)
+            },
+
+            error: function () {
+
+            }
+        })
+    })
+
+    // hien thi phuong xa
+    $('body').on('change','#district',function (){
+        let districtID = $('option:selected' , this).attr('districtID')
+        console.log(districtID)
+        $.ajax({
+            url: 'https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward?district_id=' + districtID,
+            method: 'GET',
+            headers: {
+                'token': "d250e2f1-de5e-11eb-9388-d6e0030cbbb7",
+                'Content-Type': 'application/json'
+            },
+            dataType: 'json',
+            success: function (res) {
+                let data  = res.data;
+                let html = '<option value="">-Phường Xã-</option>'
+
+                $.each(data , function (index , item){
+                    console.log(item)
+                    if (item.DistrictID == districtID){
+                        html += '<option value="'+item.WardName+'">'+item.WardName+'</option>'
+                    }
+
+                })
+
+                $('#ward').html(html)
+            },
+
+            error: function () {
+
+            }
+        })
+    })
+});
+
+
 
 
 // chuc nang tang so luong hang
@@ -213,6 +311,8 @@ function increment(key) {
             })
 
             $('#sub-total').html(subTotal)
+            $('#grand-total').html(subTotal)
+
 
         },
 
@@ -230,34 +330,35 @@ function reduction(key) {
         amount = 0;
     }
     $.ajax({
-        type: 'GET',
-        url: origin + '/cart/update',
-        data: {
-            key: key,
-            amount: amount
-        },
+            type: 'GET',
+            url: origin + '/cart/update',
+            data: {
+                key: key,
+                amount: amount
+            },
 
-        success: function (res) {
-            let carts = res.items;
-            let subTotal = res.totalPrice;
-            $.each(carts, function (index, item) {
-                if (item) {
-                    if (index == key) {
-                        $('#price-' + key).html(item.price)
-                        $('#amount-' + key).val(amount)
+            success: function (res) {
+                let carts = res.items;
+                let subTotal = res.totalPrice;
+                $.each(carts, function (index, item) {
+                    if (item) {
+                        if (index == key) {
+                            $('#price-' + key).html(item.price)
+                            $('#amount-' + key).val(amount)
+                        }
+
                     }
+                })
+                $('#sub-total').html(subTotal)
+                $('#grand-total').html(subTotal)
+            },
 
-                }
-            })
-            $('#sub-total').html(subTotal)
-        },
 
+            error: function () {
 
-    error: function () {
-
-    }
-}
-)
+            }
+        }
+    )
 
 }
 
