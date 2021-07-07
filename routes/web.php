@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BillController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\GoogleController;
@@ -29,6 +30,9 @@ Route::get('/filterCate' , [ProductController::class , 'filterByCate'])->name('f
 Route::get('/show' , [ProductController::class , 'user'])->name('user');
 Route::get('/filterPrice' , [ProductController::class , 'filterPrice'])->name('filterPrice');
 Route::get('{id}/detail' , [ProductController::class , 'detailProduct'])->name('detailProduct');
+Route::post('bill' , [BillController::class , 'showBill'])->name('showBill');
+
+
 
 
 Route::get('admin' , function (){

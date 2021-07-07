@@ -32,7 +32,7 @@
                     </div>
                     <div class="row">
                         <div class="carousel-inner col-3">
-                            <button class="cart add-cart side-menu btn hvr-hover"  id="{{ $product->id }}">Add to Cart</button>
+                            <a class="cart add-cart  @if(auth()->check()){{ "side-menu "}}@endif btn hvr-hover" @if(!auth()->check()) href="{{  route('auth.showFormLogin') }}"  @endif id="{{ $product->id }}">Add to Cart</a>
                         </div>
                         <div class="carousel-inner col-6">
                             <a class="btn hvr-hover" href="{{ route('index') }}">Quay lại</a>

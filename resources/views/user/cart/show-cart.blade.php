@@ -33,7 +33,8 @@
                             @if(session()->has(auth()->id().'cart'))
                                 @foreach(session()->get(auth()->id().'cart')->items as $key => $cart )
                                     <tr id="delete-{{ $key }}">
-                                        <td><input class="select" type="checkbox" value="{{ $key }}" name="checkbox[]"></td>
+                                        <td><input class="select" type="checkbox" value="{{ $key }}" name="checkbox[]">
+                                        </td>
                                         <td class="thumbnail-img">
                                             <a href="#">
                                                 <img class="img-fluid"
@@ -50,13 +51,17 @@
                                             <p id="unit_price-{{$key}}">{{ $cart['item']->unit_price }}</p>
                                         </td>
                                         <td>
-                                            <button id="" data-id="{{ $key }}" onclick="increment({{$key}})" class="btn hvr" style="background-color: rgb(176, 180, 53)">+</button>
-                                            <input type="number"  size="2"
-                                                                        value="{{ $cart['quantity'] }}" min="0"
-                                                                        step="1"
-                                                                        id="amount-{{$key}}"
-                                                                        class="text-center ">
-                                            <button id="" onclick="reduction({{$key}})" class="btn hvr" style="background-color: rgb(176, 180, 53)">-</button>
+                                            <button id="" data-id="{{ $key }}" onclick="increment({{$key}})"
+                                                    class="btn hvr" style="background-color: rgb(176, 180, 53)">+
+                                            </button>
+                                            <input type="number" size="2"
+                                                   value="{{ $cart['quantity'] }}" min="0"
+                                                   step="1"
+                                                   id="amount-{{$key}}"
+                                                   class="text-center ">
+                                            <button id="" onclick="reduction({{$key}})" class="btn hvr"
+                                                    style="background-color: rgb(176, 180, 53)">-
+                                            </button>
                                         </td>
                                         <td class="total-pr">
                                             <p id="price-{{$key}}">{{ $cart['price'] }}</p>
@@ -82,12 +87,15 @@
                         <a href="{{ route('index') }}" type="button" class="btn hvr-hover">Quay Lại</a>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-4" >
+                <div class="col-lg-4 col-sm-4">
                     <div class="update-box float-right">
-{{--                        <button type="button" id="delete-cart" class="btn hvr-hover">Xóa</button>--}}
-                        <button type="button" class="btn btn hvr-hover" data-toggle="modal" data-target="#exampleModal">Xóa</button>
+                        {{--                        <button type="button" id="delete-cart" class="btn hvr-hover">Xóa</button>--}}
+                        <button type="button" class="btn btn hvr-hover" data-toggle="modal" data-target="#exampleModal">
+                            Xóa
+                        </button>
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                             aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -100,7 +108,8 @@
                                         <p id="content" style="color: red">Bạn chắc chắn muốn xóa ?</p>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                                        </button>
                                         <button type="button" id="delete-cart" class="btn btn-danger">Đồng ý</button>
                                     </div>
                                 </div>
@@ -108,7 +117,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-4" >
+                <div class="col-lg-4 col-sm-4">
                     <div class="update-box float-right">
                         <a href="" type="button" class="btn hvr-hover">Cập nhập giỏ hàng</a>
                     </div>
@@ -124,7 +133,7 @@
                             <h4>Sub Total</h4>
                             <div class="ml-auto font-weight-bold"> $
                                 @if(session()->has(auth()->id().'cart'))
-                                <span id="sub-total">{{ session()->get(auth()->id().'cart')->totalPrice }}</span>
+                                    <span id="sub-total">{{ session()->get(auth()->id().'cart')->totalPrice }}</span>
                                 @endif
                             </div>
                         </div>
@@ -148,15 +157,79 @@
                         <hr>
                         <div class="d-flex gr-total">
                             <h5>Grand Total</h5>
-                            <div class="ml-auto h5"> $ <p></p></div>
+                            <div class="ml-auto h5"> $
+                                @if(session()->has(auth()->id().'cart'))
+                                    <span id="grand-total">{{ session()->get(auth()->id().'cart')->totalPrice }}</span>
+                                @endif</div>
                         </div>
                         <hr>
                     </div>
                 </div>
-                <div class="col-12 d-flex shopping-box"><a href="checkout.html"
-                                                           class="ml-auto btn hvr-hover">Checkout</a></div>
+                <div class="col-12 d-flex shopping-box">
+                    <button
+                        data-toggle="modal" data-target="#modalLoginForm"
+                        class="ml-auto btn hvr-hover">Checkout
+                    </button>
+                </div>
             </div>
+
 
         </div>
     </div>
+
+    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <form action="{{ route('showBill') }}" method="post">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header text-center">
+                        <h4 class="modal-title w-100 font-weight-bold">Nhập thông tin</h4>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+
+                    <div class="modal-body row">
+                        <div class="md-form col-6">
+                            <input type="text" id="defaultForm-email" class="form-control validate" name="name"
+                                   placeholder="name">
+                        </div>
+
+                        <div class="md-form col-6">
+                            <input type="text" id="defaultForm-pass" class="form-control validate" name="phone"
+                                   placeholder="phone">
+                        </div>
+                        <div class="md-form col-4">
+                            <select class="form-control" name="province" id="province">
+                            </select>
+                        </div>
+                        <div class="md-form col-4">
+                            <select class="form-control" name="district" id="district">
+                                <option value="">Quận/Huyện</option>
+                            </select>
+                        </div>
+                        <div class="md-form col-4">
+                            <select class="form-control" name="ward" id="ward">
+                                <option value="">Phường/Xã</option>
+                            </select>
+                        </div>
+                        <div class="md-form col-12">
+                            <input type="text" id="defaultForm-email" class="form-control validate" name="address"
+                                   placeholder="Địa chỉ cụ thể">
+                        </div>
+                        <div class="md-form col-12">
+                            <textarea class="form-control" rows="5"></textarea>
+                            <label data-error="wrong" data-success="right" for="defaultForm-email">Ghi chú</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer d-flex justify-content-center">
+                        <button class=" btn btn-default" data-dismiss="modal">Trở lại</button>
+                        <button type="submit" class="btn btn-default">Hoàn thành</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
 @endsection
