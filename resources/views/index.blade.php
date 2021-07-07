@@ -57,17 +57,16 @@
                         <div class="product-item-filter row">
                             <div class="col-12 col-sm-8 text-center text-sm-left">
                                 <div class="toolbar-sorter-right">
-                                    <span>Sort by </span>
+                                    <span style="padding: 0px">Sắp xếp theo:</span>
                                     <select id="basic" class="selectpicker show-tick form-control"
                                             data-placeholder="$ USD">
                                         <option data-display="Select">Nothing</option>
                                         <option value="1">Popularity</option>
-                                        <option value="2">High Price → High Price</option>
-                                        <option value="3">Low Price → High Price</option>
+                                        <option value="DESC">Giá Cao → Giá Thấp</option>
+                                        <option value="ASC">Giá Thấp → Giá cao</option>
                                         <option value="4">Best Selling</option>
                                     </select>
                                 </div>
-                                <p>Showing all 4 results</p>
                             </div>
                             <div class="col-12 col-sm-4 text-center text-sm-right">
                                 <ul class="nav nav-tabs ml-auto">
@@ -142,10 +141,8 @@
                 <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                     <div class="product-categori">
                         <div class="search-product">
-                            <form action="#">
-                                <input class="form-control" placeholder="Search here..." type="text">
+                                <input id="search" onkeydown="search()" class="form-control" placeholder="Search here..." type="text">
                                 <button type="submit"><i class="fa fa-search"></i></button>
-                            </form>
                         </div>
                         <div class="filter-sidebar-left">
                             <div class="title-left">

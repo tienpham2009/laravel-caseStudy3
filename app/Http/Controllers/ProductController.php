@@ -113,5 +113,30 @@ class ProductController extends Controller
         return view('user.detail', compact('product'));
     }
 
+    public function sort(Request $request)
+    {
+        $sort = $request->sort;
+
+        $products = $this->productService->sort($sort);
+
+        $data = [
+            "status"=>"success",
+            "data"=>$products
+        ];
+        return response()->json($data);
+    }
+
+    public function search(Request $request)
+    {
+        $text = $request->text;
+        $productName = $this->productService->search($text);
+        $data = [
+            "status"=>"success",
+            "data"=>$productName
+        ];
+
+        return response()->json($data);
+    }
+
 
 }

@@ -9,6 +9,7 @@
                 <h4>Tên người nhận: <span>{{ $customerInfo["name"] }}</span></h4>
                 <h4>Số điện thoại người nhận: <span>{{$customerInfo["phone"]}}</span></h4>
                 <h4>Địa chỉ nhận hàng: <span>{{ $customerInfo["address"] }}</span></h4>
+                <h4>Ghi chú: <span>{{ $customerInfo["note"] }}</span></h4>
             </div>
             <div class="row">
 
@@ -108,15 +109,24 @@
                             <div class="d-flex gr-total">
                                 <h5>Grand Total</h5>
                                 <div class="ml-auto h5"> $ @if(session()->has(auth()->id().'cart'))
-                                        <span id="sub-total">{{ session()->get(auth()->id().'cart')->totalPrice }}</span>
+                                        <span
+                                            id="sub-total">{{ session()->get(auth()->id().'cart')->totalPrice }}</span>
                                     @endif
                                 </div>
                             </div>
                             <hr>
                         </div>
                     </div>
-                    <div class="col-12 d-flex shopping-box"><a href="checkout.html" class="ml-auto btn hvr-hover">Place
-                            Order</a></div>
+                    <div class="col-12 d-flex shopping-box">
+                        <form action="{{ route('payment') }}" method="post">
+                            @csrf
+                            <input type="hidden" value="{{ $customerInfo["name"] }}" name="name">
+                            <input type="hidden" value="{{ $customerInfo["phone"] }}" name="phone">
+                            <input type="hidden" value="{{ $customerInfo["address"] }}" name="address">
+                            <input type="hidden" value="{{ $customerInfo["note"] }}" name="note">
+                            <button type="submit" class="ml-auto btn hvr-hover">Place Order</button>
+                        </form>
+                    </div>
                 </div>
             </div>
 

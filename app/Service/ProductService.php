@@ -105,4 +105,14 @@ class ProductService
         return $this->productRepository->filterPrice($priceSmall , $pricesBig);
     }
 
+    public function sort($sort)
+    {
+        return $this->productRepository->sort($sort);
+    }
+
+    public function search($text)
+    {
+        return $this->productRepository->search($text);
+    }
+
 }
