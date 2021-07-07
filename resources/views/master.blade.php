@@ -81,7 +81,12 @@
                     <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
                     @if(auth()->check())
-                        <li class="nav-item"><a class="nav-link" href="{{route('auth.logout')}}">Log out</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Profile</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{route('auth.logout')}}">Log out</a></li>
+                            </ul>
+                        </li>
                     @else
                         <li class="nav-item"><a class="nav-link" href="{{route('auth.showFormLogin')}}">Log in</a></li>
                     @endif
