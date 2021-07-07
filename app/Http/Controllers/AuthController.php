@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Brian2694\Toastr\Toastr;
 use Brian2694\Toastr\ToastrServiceProvider;
@@ -22,7 +23,6 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request): \Illuminate\Http\RedirectResponse
     {
-
         $remember = $request->has('remember');
         $email = $request->email;
         $password = $request->password;
@@ -53,7 +53,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
         $name = $request->name;
         $password = $request->password;

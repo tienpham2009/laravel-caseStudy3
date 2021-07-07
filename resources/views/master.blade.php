@@ -47,9 +47,7 @@
     <link rel="stylesheet" href="{{ asset('css/my/my.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src=//code.jquery.com/jquery-3.5.1.slim.min.js
-            integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
-
+    <script src=//code.jquery.com/jquery-3.5.1.slim.min.js integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
 </head>
 
 <body>
@@ -172,6 +170,8 @@
 <script src="{{ asset('js/custom.js') }}"></script>
 <script src="{{ asset('js/jquery-ui.js') }}"></script>
 <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
+
 </body>
+@yield('modal')
 
 </html>

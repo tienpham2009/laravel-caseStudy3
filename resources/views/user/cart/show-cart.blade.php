@@ -30,8 +30,8 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @if(session()->has('cart'))
-                                @foreach(session()->get('cart')->items as $key => $cart )
+                            @if(session()->has(auth()->id().'cart'))
+                                @foreach(session()->get(auth()->id().'cart')->items as $key => $cart )
                                     <tr id="delete-{{ $key }}">
                                         <td><input class="select" type="checkbox" value="{{ $key }}" name="checkbox[]"></td>
                                         <td class="thumbnail-img">
@@ -123,8 +123,8 @@
                         <div class="d-flex">
                             <h4>Sub Total</h4>
                             <div class="ml-auto font-weight-bold"> $
-                                @if(session()->has('cart'))
-                                <span id="sub-total">{{ session()->get('cart')->totalPrice }}</span>
+                                @if(session()->has(auth()->id().'cart'))
+                                <span id="sub-total">{{ session()->get(auth()->id().'cart')->totalPrice }}</span>
                                 @endif
                             </div>
                         </div>

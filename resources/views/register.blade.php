@@ -28,28 +28,41 @@
             <form action="{{route('auth.register')}}" method="post">
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="name" placeholder="Full name">
+                    <input type="text" class="form-control" name="name" placeholder="Full name" value="{{old('name')}}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
                         </div>
                     </div>
                 </div>
+                <div class="input-group mb-3 text-danger">
+                    @error('name')
+                    {{ $message }}
+                    @enderror
+                </div>
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" name="email" placeholder="Email">
+                    <input type="text" class="form-control" name="email" placeholder="Email" value="{{old('email')}}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
                         </div>
                     </div>
                 </div>
+                <div class="input-group mb-3 text-danger" >
+                    @error('email')
+                    {{ $message }}
+                    @enderror
+                </div>
+
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="address" placeholder="Address">
+                    <input type="text" class="form-control" name="address" placeholder="Address" value="{{old('address')}}">
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-envelope"></span>
+                            <span class="fas fa-address-card"></span>
                         </div>
                     </div>
+                </div>
+                <div class="input-group mb-3 text-danger">
                 </div>
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" name="password" id="password" placeholder="Password">
@@ -59,8 +72,14 @@
                         </div>
                     </div>
                 </div>
+                <div class="input-group mb-3 text-danger">
+                    @error('password')
+                    {{ $message }}
+                    @enderror
+                </div>
+
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" id="retype-password" placeholder="Retype password">
+                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Password Confirmation">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
