@@ -30,6 +30,10 @@ Route::get('/show' , [ProductController::class , 'user'])->name('user');
 Route::get('/filterPrice' , [ProductController::class , 'filterPrice'])->name('filterPrice');
 Route::get('{id}/detail' , [ProductController::class , 'detailProduct'])->name('detailProduct');
 Route::post('bill' , [BillController::class , 'showBill'])->name('showBill');
+Route::post('payment' , [BillController::class , 'payment'])->name('payment');
+Route::get('bill' , [BillController::class , 'bill'])->name('bill');
+Route::get('sort' , [ProductController::class , 'sort'])->name('sort');
+Route::get('search' , [ProductController::class , 'search'])->name('search');
 
 
 

@@ -39,7 +39,51 @@
     <link rel="stylesheet" href="{{ asset('css/my/my.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src=//code.jquery.com/jquery-3.5.1.slim.min.js integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
+    <script src=//code.jquery.com/jquery-3.5.1.slim.min.js
+            integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
+    <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"/>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        //chuc nang search
+        function search() {
+
+            let text = $('#search').val();
+            $.ajax({
+                url: origin + '/search',
+                type: 'GET',
+                data: {
+                    text: text
+                },
+
+
+                success: function (res) {
+                    let productName = [];
+                    let data = res.data;
+                    $.each(data, function (index, item) {
+                        productName.push(item)
+                    })
+
+                    $('#search').autocomplete({
+                        source: productName
+                    });
+
+
+                },
+
+                error: function () {
+
+                }
+            })
+
+        }
+
+    </script>
+
+
 </head>
 
 <body>
@@ -57,7 +101,8 @@
                         aria-controls="navbars-rs-food" aria-expanded="false" aria-label="Toggle navigation">
                     <i class="fa fa-bars"></i>
                 </button>
-                <a class="navbar-brand" href="{{ route('index') }}"><img src="{{ asset('storage/images/logo.png') }}" class="logo" alt=""></a>
+                <a class="navbar-brand" href="{{ route('index') }}"><img src="{{ asset('storage/images/logo.png') }}"
+                                                                         class="logo" alt=""></a>
 
             </div>
             <!-- End Header Navigation -->
@@ -72,7 +117,7 @@
                     <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
                     @if(auth()->check())
-                    <li class="nav-item"><a class="nav-link" href="{{route('auth.logout')}}">Log out</a></li>
+                        <li class="nav-item"><a class="nav-link" href="{{route('auth.logout')}}">Log out</a></li>
                     @endif
                 </ul>
             </div>
@@ -81,14 +126,13 @@
             <!-- Start Atribute Navigation -->
             <div class="attr-nav">
                 <ul>
-                    <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
-                    <li class="side-menu" >
-                        <a href="#"  class="">
+                    <li class="side-menu">
+                        <a href="#" class="my-cart">
                             <i class="fa fa-shopping-bag"></i>
                             @if(session()->has('cart'))
-                            <span  id="count-cart" class="badge">{{ count(session()->get('cart')->items) }}</span>
+                                <span id="count-cart" class="badge">{{ count(session()->get('cart')->items) }}</span>
                             @else
-                                <span  id="count-cart" class="badge"></span>
+                                <span id="count-cart" class="badge"></span>
                             @endif
                             <p>My Cart</p>
                         </a>
@@ -103,10 +147,11 @@
             <li class="cart-box">
                 <ul class="cart">
                     <li>
-                        <a href="{{ route('cart.show') }}" class="btn hvr-hover" type="button" style="text-align: center">View Cart</a>
+                        <a href="{{ route('cart.show') }}" class="btn hvr-hover" type="button"
+                           style="text-align: center">View Cart</a>
                     </li>
                 </ul>
-                <ul class="cart-list" >
+                <ul class="cart-list">
                 </ul>
             </li>
         </div>
@@ -135,10 +180,9 @@
 {{--        <a href="https://html.design/">html design</a></p>--}}
 {{--</div>--}}
 <!-- End copyright  -->
+
 <script src="{{ asset('js/my/cart.js') }}"></script>
-
 <script src="{{ asset('js/my/show.js') }}"></script>
-
 
 <!-- ALL JS FILES -->
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
