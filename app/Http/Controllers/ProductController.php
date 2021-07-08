@@ -20,13 +20,14 @@ class ProductController extends Controller
     }
 
     public function index()
-    {
+    {$this->isPermission('admin');
         $products = $this->productService->getAll();
         return view('admin.products.show', compact('products'));
     }
 
     public function create()
     {
+        $this->isPermission('admin');
         $categories = $this->productService->getCategory();
         return view('admin.products.create', compact('categories'));
     }
@@ -39,12 +40,15 @@ class ProductController extends Controller
 
     public function detail($id)
     {
+        $this->isPermission('admin');
         $product = $this->productService->getById($id);
         return view('admin.products.detail', compact('product'));
     }
 
     public function edit($id)
     {
+        $this->isPermission('admin');
+        $this->isPermission('admin');
         $product = $this->productService->getById($id);
         $categories = $this->productService->getCategory();
         return view('admin.products.edit', compact('product', 'categories'));
@@ -52,6 +56,7 @@ class ProductController extends Controller
 
     public function update(UpdateProductRequest $productRequest, $id)
     {
+        $this->isPermission('admin');
         $this->productService->update($productRequest, $id);
         return redirect()->route('Product.show');
 
@@ -59,6 +64,7 @@ class ProductController extends Controller
 
     public function delete(Request $request)
     {
+        $this->isPermission('admin');
         $ids = $request->id;
         $this->productService->destroy($ids);
 

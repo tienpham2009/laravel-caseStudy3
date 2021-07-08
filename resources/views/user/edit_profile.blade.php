@@ -30,7 +30,8 @@
             <div class="title-left">
                 <h3>Edit Profile</h3>
             </div>
-            <form class="mt-3 review-form-box" action="{{route('user.editProfile',\Illuminate\Support\Facades\Auth::id())}}" method="post">
+            <form class="mt-3 review-form-box"
+                  action="{{route('user.editProfile',\Illuminate\Support\Facades\Auth::id())}}" method="post">
                 @csrf
                 <div class="form-row">
                     <div class="form-group col-md-6">
@@ -39,7 +40,18 @@
                                value="{{$user->name}}"></div>
                     <div class="form-group col-md-6">
                         <label for="InputPhone" class="mb-0">Phone</label>
-                        <input type="text" class="form-control" id="InputPhone" name="phone" placeholder="{{$user->phone}}"></div>
+                        <input type="text" class="form-control" id="InputPhone" name="phone"
+                               placeholder="{{$user->phone}}"></div>
+                    <div class="form-group col-md-6 text-danger">
+                        @error('name')
+                        {{ $message }}
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6 text-danger">
+                        @error('phone')
+                        {{ $message }}
+                        @enderror
+                    </div>
                     <div class="form-group col-md-6">
                         <label for="InputAddress" class="mb-0"> Old Address</label>
                         <input type="text" class="form-control" id="InputAddress" placeholder="{{$user->address}}"
@@ -62,6 +74,15 @@
                                 </select>
                             </div>
                         </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                    </div>
+                    <div class="form-group col-md-6 text-danger">
+                        @if($errors->has('province')||$errors->has('district')||$errors->has('ward'))
+                            <div class="input-group text-danger">
+                                This field can't be empty
+                            </div>
+                        @endif
                     </div>
                 </div>
                 <button type="submit" class="btn hvr-hover">Edit Profile</button>
