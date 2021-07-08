@@ -25,7 +25,14 @@
     <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
     <!-- summernote -->
     <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/my/my.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
@@ -238,6 +245,66 @@
                                 <a href="{{ route('Product.create') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Thêm mới sản phẩm</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/layout/boxed.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Boxed</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/layout/fixed-sidebar.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Fixed Sidebar</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/layout/fixed-sidebar-custom.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Fixed Sidebar <small>+ Custom Area</small></p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/layout/fixed-topnav.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Fixed Navbar</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/layout/fixed-footer.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Fixed Footer</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="pages/layout/collapsed-sidebar.html" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Collapsed Sidebar</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <i class="nav-icon fas fa-copy"></i>
+                            <p>
+                                Categories
+                                <i class="fas fa-angle-left right"></i>
+                                <span class="badge badge-info right">6</span>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('Category.show') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Danh mục</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('Category.create') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Thêm mới danh mục</p>
                                 </a>
                             </li>
                             <li class="nav-item">

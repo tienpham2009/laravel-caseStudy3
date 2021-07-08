@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body class="hold-transition register-page">
 <div class="register-box">
@@ -28,28 +29,69 @@
             <form action="{{route('auth.register')}}" method="post">
                 @csrf
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="name" placeholder="Full name">
+                    <input type="text" class="form-control" name="name" placeholder="Full name" value="{{old('name')}}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-user"></span>
                         </div>
                     </div>
                 </div>
+                <div class="input-group mb-3 text-danger">
+                    @error('name')
+                    {{ $message }}
+                    @enderror
+                </div>
                 <div class="input-group mb-3">
-                    <input type="email" class="form-control" name="email" placeholder="Email">
+                    <input type="text" class="form-control" name="email" placeholder="Email" value="{{old('email')}}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
                         </div>
                     </div>
                 </div>
+                <div class="input-group mb-3 text-danger">
+                    @error('email')
+                    {{ $message }}
+                    @enderror
+                </div>
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="address" placeholder="Address">
+                    <input type="text" class="form-control" name="phone" placeholder="Phone" value="{{old('phone')}}">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-envelope"></span>
                         </div>
                     </div>
+                </div>
+                <div class="input-group mb-3 text-danger">
+                    @error('phone')
+                    {{ $message }}
+                    @enderror
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <select class="form-control" name="province" id="province">
+                        </select>
+                    </div>
+                    <div class=" col-4">
+                        <select class="form-control" name="district" id="district">
+                            <option value="">Quận/Huyện</option>
+                        </select>
+                    </div>
+                    <div class=" col-4">
+                        <select class="form-control" name="ward" id="ward">
+                            <option value="">Phường/Xã</option>
+                        </select>
+                    </div>
+                </div>
+
+                @if($errors->has('province')||$errors->has('district')||$errors->has('ward'))
+                    <div class="input-group text-danger">
+                        This field can't be empty
+                    </div>
+                @endif
+
+
+                <div class="input-group mb-3 text-danger">
                 </div>
                 <div class="input-group mb-3">
                     <input type="password" class="form-control" name="password" id="password" placeholder="Password">
@@ -59,8 +101,15 @@
                         </div>
                     </div>
                 </div>
+                <div class="input-group mb-3 text-danger">
+                    @error('password')
+                    {{ $message }}
+                    @enderror
+                </div>
+
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" id="retype-password" placeholder="Retype password">
+                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation"
+                           placeholder="Password Confirmation">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -68,16 +117,8 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-8">
-                        <div class="icheck-primary">
-                            <input type="checkbox" id="agreeTerms" name="terms" value="agree">
-                            <label for="agreeTerms">
-                                I agree to the <a href="#">terms</a>
-                            </label>
-                        </div>
-                    </div>
                     <!-- /.col -->
-                    <div class="col-4">
+                    <div class="col-12">
                         <button type="submit" class="btn btn-primary btn-block">Register</button>
                     </div>
                     <!-- /.col -->
@@ -86,11 +127,7 @@
 
             <div class="social-auth-links text-center">
                 <p>- OR -</p>
-                <a href="#" class="btn btn-block btn-primary">
-                    <i class="fab fa-facebook mr-2"></i>
-                    Sign up using Facebook
-                </a>
-                <a href="#" class="btn btn-block btn-danger">
+                <a href="{{route('auth.google')}}" class="btn btn-block btn-danger">
                     <i class="fab fa-google-plus mr-2"></i>
                     Sign up using Google+
                 </a>
@@ -102,7 +139,7 @@
     </div><!-- /.card -->
 </div>
 <!-- /.register-box -->
-
+<script src="{{asset('js/my/cart.js')}}"></script>
 <!-- jQuery -->
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->

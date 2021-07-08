@@ -39,6 +39,11 @@
                         </div>
                     </div>
                 </div>
+                <div class="input-group mb-3 text-danger">
+                    @error('email')
+                    {{$message}}
+                    @enderror
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary btn-block">Request new password</button>

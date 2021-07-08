@@ -14,6 +14,14 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <link rel="stylesheet" type="text/css"
+          href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
     <!-- Site Icons -->
@@ -80,7 +88,16 @@
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                     <li class="nav-item active"><a class="nav-link" href="{{ route('index') }}">Home</a></li>
                     @if(auth()->check())
-                        <li class="nav-item"><a class="nav-link" href="{{route('auth.logout')}}">Log out</a></li>
+<<<<<<< HEAD
+                        <li class="dropdown">
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Profile</a>
+                            <ul class="dropdown-menu">
+                                <li><a href="{{route('user.profile',\Illuminate\Support\Facades\Auth::id())}}">Profile</a></li>
+                                <li><a href="{{route('auth.logout')}}">Log out</a></li>
+                            </ul>
+                        </li>
+                    @else
+                        <li class="nav-item"><a class="nav-link" href="{{route('auth.showFormLogin')}}">Log in</a></li>
                     @endif
                 </ul>
             </div>
