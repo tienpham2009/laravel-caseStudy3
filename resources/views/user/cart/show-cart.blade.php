@@ -88,7 +88,7 @@
                         {{--                        <button type="button" id="delete-cart" class="btn hvr-hover">Xóa</button>--}}
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <div class="modal " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                              aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -170,7 +170,7 @@
         </div>
     </div>
 
-    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal " id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form action="{{ route('showBill') }}" method="post">
@@ -224,7 +224,7 @@
             </form>
         </div>
     </div>
-    <div class="modal fade" id="check-cart" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal " id="check-cart" tabindex="-1" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

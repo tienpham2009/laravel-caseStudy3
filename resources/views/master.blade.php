@@ -88,7 +88,6 @@
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                     <li class="nav-item active"><a class="nav-link" href="{{ route('index') }}">Home</a></li>
                     @if(auth()->check())
-<<<<<<< HEAD
                         <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Profile</a>
                             <ul class="dropdown-menu">

@@ -28,7 +28,7 @@
                                                 <td>
                                                     <a type="submit" class="btn btn-primary"
                                                        href="{{ route('Category.edit' , $category->id) }}">Sửa</a>
-                                                    <a type="submit" class="btn btn-primary"
+                                                    <a type="submit" class="btn btn-primary" onclick="return confirm('Bạn chắc chắn muốn xóa ?')"
                                                        href="{{ route('Category.delete' , $category->id) }}">Xóa</a>
                                                 </td>
                                             </tr>
