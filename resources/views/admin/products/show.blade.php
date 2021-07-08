@@ -14,14 +14,6 @@
                                     <a class="btn btn-info active" href="javascript:void(0)" data-filter="all">Tất
                                         cả
                                         sản phẩm</a>
-                                    <a class="btn btn-info" href="javascript:void(0)" data-filter="1"> Category 1
-                                        (WHITE) </a>
-                                    <a class="btn btn-info" href="javascript:void(0)" data-filter="2"> Category 2
-                                        (BLACK) </a>
-                                    <a class="btn btn-info" href="javascript:void(0)" data-filter="3"> Category 3
-                                        (COLORED) </a>
-                                    <a class="btn btn-info" href="javascript:void(0)" data-filter="4"> Category 4
-                                        (COLORED, BLACK) </a>
                                 </div>
                                 <div class="mb-2">
                                     <div>

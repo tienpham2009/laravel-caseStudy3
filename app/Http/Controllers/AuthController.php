@@ -31,19 +31,12 @@ class AuthController extends Controller
             'password' => $password
         ];
 
-        if (!Auth::attempt($data,$remember)) {
+        if (!Auth::attempt($data, $remember)) {
             session()->flash('login-error', 'Tài khoản hoặc mật khẩu không chính xác');
             return redirect()->route('auth.showFormLogin');
-        }else{
-            $id =Auth::id();
-            $user=User::findOrFail($id);
-            if ($user->type===0){
-                return redirect()->route('index');
-            }
-            else{
-                return redirect()->route('Product.show');
-            }
         }
+        return redirect()->route('index');
+
 
     }
 
@@ -59,7 +52,7 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'address' => $data['address'],
-            'phone'=>$data['phone'],
+            'phone' => $data['phone'],
         ]);
     }
 
@@ -68,14 +61,14 @@ class AuthController extends Controller
         $name = $request->name;
         $password = $request->password;
         $email = $request->email;
-        $phone=$request->phone;
-        $address = $request->province.','.$request->district.','.$request->ward;
+        $phone = $request->phone;
+        $address = $request->province . ',' . $request->district . ',' . $request->ward;
         $data = [
             'name' => $name,
             'email' => $email,
             'password' => $password,
             'address' => $address,
-            'phone'=>$phone,
+            'phone' => $phone,
         ];
         $check = $this->create($data);
         if ($check) {
@@ -90,6 +83,6 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('auth.showFormLogin');
+        return redirect()->route('index');
     }
 }

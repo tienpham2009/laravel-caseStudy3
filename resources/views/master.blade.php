@@ -14,7 +14,8 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css"
+          rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -44,52 +45,19 @@
     <!-- fontawesome -->
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
           integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="{{ asset('css/my/my.css') }}">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src=//code.jquery.com/jquery-3.5.1.slim.min.js
-            integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
     <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"/>
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="{{ asset('css/my/my.css') }}">
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {{--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>--}}
+    {{--    <script src=//code.jquery.com/jquery-3.5.1.slim.min.js--}}
+    {{--            integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>--}}
+
+
+    {{--    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>--}}
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script>
-        //chuc nang search
-        function search() {
-
-            let text = $('#search').val();
-            $.ajax({
-                url: origin + '/search',
-                type: 'GET',
-                data: {
-                    text: text
-                },
-
-
-                success: function (res) {
-                    let productName = [];
-                    let data = res.data;
-                    $.each(data, function (index, item) {
-                        productName.push(item)
-                    })
-
-                    $('#search').autocomplete({
-                        source: productName
-                    });
-
-
-                },
-
-                error: function () {
-
-                }
-            })
-
-        }
-
-    </script>
 
 
 </head>
@@ -119,16 +87,16 @@
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                     <li class="nav-item active"><a class="nav-link" href="{{ route('index') }}">Home</a></li>
-                    <li class="dropdown">
-                        <a href="{{ route('Product.show') }}" class="nav-link ">SHOP</a>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
-                    <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+                    @can('admin')
+                        <li class="nav-item active"><a class="nav-link" href="{{ route('Product.show') }}">Manager</a></li>
+                    @endcan
                     @if(auth()->check())
                         <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Profile</a>
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{route('user.profile',\Illuminate\Support\Facades\Auth::id())}}">Profile</a></li>
+                                <li>
+                                    <a href="{{route('user.profile',\Illuminate\Support\Facades\Auth::id())}}">Profile</a>
+                                </li>
                                 <li><a href="{{route('auth.logout')}}">Log out</a></li>
                             </ul>
                         </li>
@@ -164,7 +132,7 @@
                 <ul class="cart">
                     <li>
                         <a href="{{ route('cart.show') }}" class="btn hvr-hover" type="button"
-                           style="text-align: center">View Cart</a>
+                           style="text-align: center">Xem giỏ hàng</a>
                     </li>
                 </ul>
                 <ul class="cart-list">
@@ -197,11 +165,11 @@
 {{--</div>--}}
 <!-- End copyright  -->
 
-<script src="{{ asset('js/my/cart.js') }}"></script>
+
 <script src="{{ asset('js/my/show.js') }}"></script>
 
 <!-- ALL JS FILES -->
-<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>
+{{--<script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>--}}
 <script src="{{ asset('js/popper.min.js') }}"></script>
 <script src="{{ asset('js/bootstrap.min.js') }}"></script>
 <!-- ALL PLUGINS -->
@@ -216,8 +184,45 @@
 <script src="{{ asset('js/form-validator.min.js') }}"></script>
 <script src="{{ asset('js/contact-form-script.js') }}"></script>
 <script src="{{ asset('js/custom.js') }}"></script>
-<script src="{{ asset('js/jquery-ui.js') }}"></script>
+{{--<script src="{{ asset('js/jquery-ui.js') }}"></script>--}}
 <script src="{{ asset('js/jquery.nicescroll.min.js') }}"></script>
+<script>
+    //chuc nang search
+    function search() {
+
+        let text = $('#search').val();
+        $.ajax({
+            url: origin + '/search',
+            type: 'GET',
+            data: {
+                text: text
+            },
+
+
+            success: function (res) {
+                let productName = [];
+                let data = res.data;
+                $.each(data, function (index, item) {
+                    productName.push(item.name)
+                });
+                console.log(productName)
+
+
+                $('#search').autocomplete({
+                    source: productName
+                });
+
+
+            },
+
+            error: function () {
+
+            }
+        })
+
+    }
+</script>
+<script src="{{ asset('js/my/cart.js') }}"></script>
 
 </body>
 @yield('modal')
