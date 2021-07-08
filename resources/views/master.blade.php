@@ -84,6 +84,7 @@
                         <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Profile</a>
                             <ul class="dropdown-menu">
+                                <li><a href="{{route('user.profile',\Illuminate\Support\Facades\Auth::id())}}">Profile</a></li>
                                 <li><a href="{{route('auth.logout')}}">Log out</a></li>
                             </ul>
                         </li>

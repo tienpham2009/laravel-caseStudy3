@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\LoginWithFacebookController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -51,6 +53,16 @@ Route::prefix('Product')->group(function () {
     Route::get('delete' , [ProductController::class , 'delete'])->name('Product.delete');
 });
 
+Route::prefix('Category')->group(function () {
+    Route::get('/' , [CategoryController::class , 'index'])->name('Category.show');
+    Route::get('create' , [CategoryController::class , 'create'])->name('Category.create');
+    Route::post('create' , [CategoryController::class , 'store'])->name('Category.store');
+    Route::get('{id}/detail' , [CategoryController::class , 'detail'])->name('Category.detail');
+    Route::get('{id}/edit' , [CategoryController::class , 'edit'])->name('Category.edit');
+    Route::post('{id}/update' , [CategoryController::class , 'update'])->name('Category.update');
+    Route::get('{id}/delete' , [CategoryController::class , 'destroy'])->name('Category.delete');
+});
+
 Route::get('/login',[AuthController::class,'showFormLogin'])->name('auth.showFormLogin');
 Route::get('/register',[AuthController::class,'showFormRegister'])->name('auth.showFormRegister');
 Route::post('/login',[AuthController::class,'login'])->name('login');
@@ -68,6 +80,9 @@ Route::middleware('auth')->group(function (){
 //        return redirect()->route('index');
 //    })->name('user.dashboard');
     Route::get('logout',[AuthController::class,'logout'])->name('auth.logout');
+    Route::get('{id}/profile',[UserController::class,'showProfile'])->name('user.profile');
+    Route::post('{id}/change-password',[UserController::class,'changePassword'])->name('user.changePassword');
+    Route::post('{id}/edit-profile',[UserController::class,'editProfile'])->name('user.editProfile');
 });
 
 

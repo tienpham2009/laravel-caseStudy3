@@ -26,6 +26,10 @@ class RegisterRequest extends FormRequest
         return [
             'name' => 'required',
             'email' => 'required|email:rfc,dns|unique:users,email',
+            'phone'=>'required|regex:/(0)[0-9]{9}/',
+            'province'=>'required',
+            'district'=>'required',
+            'ward'=>'required',
             'password' => 'required|min:4|confirmed'
         ];
     }
@@ -35,6 +39,11 @@ class RegisterRequest extends FormRequest
         return [
             'name.required' => 'This field can\'t be empty',
             'email.required' => 'This field can\'t be empty',
+            'phone.required'=>'This field can\'t be empty',
+            'phone.regex'=>'Wrong phone format',
+            'province.required' => 'This field can\'t be empty',
+            'district.required' => 'This field can\'t be empty',
+            'ward.required' => 'This field can\'t be empty',
             'email.email' => 'Wrong email format',
             'email.unique' => 'Email is existed',
             'password.required'=>'This field can\'t be empty',

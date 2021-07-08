@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="{{asset('plugins/icheck-bootstrap/icheck-bootstrap.min.css')}}">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{asset('dist/css/adminlte.min.css')}}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body class="hold-transition register-page">
 <div class="register-box">
@@ -48,20 +49,48 @@
                         </div>
                     </div>
                 </div>
-                <div class="input-group mb-3 text-danger" >
+                <div class="input-group mb-3 text-danger">
                     @error('email')
                     {{ $message }}
                     @enderror
                 </div>
-
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" name="address" placeholder="Address" value="{{old('address')}}">
+                    <input type="text" class="form-control" name="phone" placeholder="Phone" value="{{old('phone')}}">
                     <div class="input-group-append">
                         <div class="input-group-text">
-                            <span class="fas fa-address-card"></span>
+                            <span class="fas fa-envelope"></span>
                         </div>
                     </div>
                 </div>
+                <div class="input-group mb-3 text-danger">
+                    @error('phone')
+                    {{ $message }}
+                    @enderror
+                </div>
+                <div class="row">
+                    <div class="col-4">
+                        <select class="form-control" name="province" id="province">
+                        </select>
+                    </div>
+                    <div class=" col-4">
+                        <select class="form-control" name="district" id="district">
+                            <option value="">Quận/Huyện</option>
+                        </select>
+                    </div>
+                    <div class=" col-4">
+                        <select class="form-control" name="ward" id="ward">
+                            <option value="">Phường/Xã</option>
+                        </select>
+                    </div>
+                </div>
+
+                @if($errors->has('province')||$errors->has('district')||$errors->has('ward'))
+                    <div class="input-group text-danger">
+                        This field can't be empty
+                    </div>
+                @endif
+
+
                 <div class="input-group mb-3 text-danger">
                 </div>
                 <div class="input-group mb-3">
@@ -79,7 +108,8 @@
                 </div>
 
                 <div class="input-group mb-3">
-                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation" placeholder="Password Confirmation">
+                    <input type="password" class="form-control" name="password_confirmation" id="password_confirmation"
+                           placeholder="Password Confirmation">
                     <div class="input-group-append">
                         <div class="input-group-text">
                             <span class="fas fa-lock"></span>
@@ -109,7 +139,7 @@
     </div><!-- /.card -->
 </div>
 <!-- /.register-box -->
-
+<script src="{{asset('js/my/cart.js')}}"></script>
 <!-- jQuery -->
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->

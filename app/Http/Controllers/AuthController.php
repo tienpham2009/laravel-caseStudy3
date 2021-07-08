@@ -50,6 +50,7 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'address' => $data['address'],
+            'phone'=>$data['phone'],
         ]);
     }
 
@@ -58,12 +59,14 @@ class AuthController extends Controller
         $name = $request->name;
         $password = $request->password;
         $email = $request->email;
-        $address = $request->address;
+        $phone=$request->phone;
+        $address = $request->province.','.$request->district.','.$request->ward;
         $data = [
             'name' => $name,
             'email' => $email,
             'password' => $password,
             'address' => $address,
+            'phone'=>$phone,
         ];
         $check = $this->create($data);
         if ($check) {
