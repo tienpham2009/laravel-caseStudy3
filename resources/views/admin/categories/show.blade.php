@@ -4,7 +4,7 @@
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card card-primary">
+                    <div class="card ">
                         <div class="card-header">
                             <h4 class="card-title">Danh sách thể loại</h4>
                         </div>
@@ -28,7 +28,7 @@
                                                 <td>
                                                     <a type="submit" class="btn btn-primary"
                                                        href="{{ route('Category.edit' , $category->id) }}">Sửa</a>
-                                                    <a type="submit" class="btn btn-primary" onclick="return confirm('Bạn chắc chắn muốn xóa ?')"
+                                                    <a type="submit" class="btn btn-danger" onclick="return confirm('Bạn chắc chắn muốn xóa ?')"
                                                        href="{{ route('Category.delete' , $category->id) }}">Xóa</a>
                                                 </td>
                                             </tr>

@@ -28,7 +28,7 @@ abstract class Repository
 
     public function getAll()
     {
-        return $this->model->all();
+        return $this->model->paginate(10);
     }
 
     public function findById($id)

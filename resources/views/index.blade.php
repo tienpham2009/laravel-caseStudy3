@@ -82,6 +82,7 @@
                         <div class="product-categorie-box">
                             <div class="tab-content">
                                 <div role="tabpanel" class="tab-pane show active" id="grid-view">
+                                    {{ $products->links() }}
                                     <div class="row filter-data">
                                         @forelse($products as $product)
                                             <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
@@ -126,6 +127,7 @@
                                                 <p>Không có sản phẩm</p>
                                             </div>
                                         @endforelse
+
                                     </div>
                                 </div>
                             </div>
