@@ -138,5 +138,17 @@ class ProductController extends Controller
         return response()->json($data);
     }
 
+    public function  searchByName(Request $request)
+    {
+        $text = $request->text;
+        $products = $this->productService->searchByName($text);
+        $data = [
+            "status"=>"success",
+            "data"=>$products
+        ];
+
+        return response()->json($data);
+    }
+
 
 }

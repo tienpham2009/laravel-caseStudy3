@@ -4,11 +4,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>Cart</h2>
-                    <ul class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Shop</a></li>
-                        <li class="breadcrumb-item active">Cart</li>
-                    </ul>
+                    <h2>Giỏ Hàng</h2>
                 </div>
             </div>
         </div>
@@ -22,11 +18,11 @@
                             <thead>
                             <tr>
                                 <th><input type="checkbox" id="checkAll"><span>  Chọn tất cả</span></th>
-                                <th>Images</th>
-                                <th>Product Name</th>
-                                <th>Price</th>
-                                <th>Quantity</th>
-                                <th>Total</th>
+                                <th>ẢNh</th>
+                                <th>Tên sản phẩm</th>
+                                <th>Giá</th>
+                                <th>Số lượng</th>
+                                <th>Tổng giá</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -92,7 +88,7 @@
                         {{--                        <button type="button" id="delete-cart" class="btn hvr-hover">Xóa</button>--}}
 
                         <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                        <div class="modal " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                              aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
@@ -167,16 +163,14 @@
                 <div class="col-12 d-flex shopping-box">
                         <button
                             data-toggle="modal" data-target="" id="check-out"
-                            class="ml-auto btn hvr-hover">Checkout
+                            class="ml-auto btn hvr-hover">Thanh toán
                         </button>
                 </div>
             </div>
-
-
         </div>
     </div>
 
-    <div class="modal fade" id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+    <div class="modal " id="modalLoginForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
             <form action="{{ route('showBill') }}" method="post">
@@ -218,8 +212,8 @@
                                    placeholder="Địa chỉ cụ thể">
                         </div>
                         <div class="md-form col-12">
-                            <textarea class="form-control" rows="5" name="note"></textarea>
                             <label data-error="wrong" data-success="right" for="defaultForm-email">Ghi chú</label>
+                            <textarea class="form-control" rows="5" name="note"></textarea>
                         </div>
                     </div>
                     <div class="modal-footer d-flex justify-content-center">
@@ -230,7 +224,7 @@
             </form>
         </div>
     </div>
-    <div class="modal fade" id="check-cart" tabindex="-1" aria-labelledby="exampleModalLabel"
+    <div class="modal " id="check-cart" tabindex="-1" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

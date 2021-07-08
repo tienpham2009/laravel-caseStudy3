@@ -115,4 +115,9 @@ class ProductService
         return $this->productRepository->search($text);
     }
 
+    public function searchByName($text)
+    {
+        return $this->productRepository->searchByName($text);
+    }
+
 }

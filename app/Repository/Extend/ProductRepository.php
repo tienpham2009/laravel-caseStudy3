@@ -35,4 +35,9 @@ class ProductRepository extends Repository
                             ->where("name" , "LIKE" , '%'.$text.'%')->get();
     }
 
+    public function searchByName($text)
+    {
+        return $this->model->where("name" , $text)->get();
+    }
+
 }

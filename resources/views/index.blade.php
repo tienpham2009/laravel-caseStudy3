@@ -60,11 +60,9 @@
                                     <span style="padding: 0px">Sắp xếp theo:</span>
                                     <select id="basic" class="selectpicker show-tick form-control"
                                             data-placeholder="$ USD">
-                                        <option data-display="Select">Nothing</option>
-                                        <option value="1">Popularity</option>
+                                        <option data-display="Select">-----</option>
                                         <option value="DESC">Giá Cao → Giá Thấp</option>
                                         <option value="ASC">Giá Thấp → Giá cao</option>
-                                        <option value="4">Best Selling</option>
                                     </select>
                                 </div>
                             </div>
@@ -81,18 +79,15 @@
                                 </ul>
                             </div>
                         </div>
-
                         <div class="product-categorie-box">
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+                                <div role="tabpanel" class="tab-pane show active" id="grid-view">
+                                    fdsfds
                                     <div class="row filter-data">
                                         @forelse($products as $product)
                                             <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
                                                 <div class="products-single fix">
                                                     <div class="box-img-hover image-product">
-                                                        <div class="type-lb">
-                                                            <p class="sale">Sale</p>
-                                                        </div>
                                                         <img
                                                             src="{{ asset('storage/productImage/'. $product->image ) }}"
                                                             class="img-fluid" alt="Image">
@@ -123,7 +118,7 @@
                                                     <div class="why-text">
                                                         <h4><a href="{{ route('detailProduct' , $product->id) }}"
                                                                class="">{{ $product->name }}</a></h4>
-                                                        <h5>{{ $product->unit_price }}</h5>
+                                                        <h5>$ {{ $product->unit_price }}</h5>
                                                     </div>
                                                 </div>
                                             </div>
@@ -141,8 +136,8 @@
                 <div class="col-xl-3 col-lg-3 col-sm-12 col-xs-12 sidebar-shop-left">
                     <div class="product-categori">
                         <div class="search-product">
-                                <input id="search" onkeydown="search()" class="form-control" placeholder="Search here..." type="text">
-                                <button type="submit"><i class="fa fa-search"></i></button>
+                                <input id="search" onkeyup="search()" class="form-control" placeholder="Search here..." type="text">
+                                <button type="submit" id="searchByName"><i class="fa fa-search"></i></button>
                         </div>
                         <div class="filter-sidebar-left">
                             <div class="title-left">
@@ -166,14 +161,14 @@
                         </div>
                         <div class="filter-price-left">
                             <div class="title-left">
-                                <h3>Price</h3>
+                                <h3>Giá</h3>
                             </div>
                             <div class="price-box-slider">
                                 <div id="slider-range"></div>
                                 <p>
                                     <input type="text" id="amount" readonly
                                            style="border:0; color:#fbb714; font-weight:bold;">
-                                    <button class="btn hvr-hover" type="submit" id="filter-price">Filter</button>
+                                    <button class="btn hvr-hover" type="submit" id="filter-price">Lọc</button>
                                 </p>
                             </div>
                         </div>

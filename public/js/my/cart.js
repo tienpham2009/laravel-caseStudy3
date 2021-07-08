@@ -216,6 +216,25 @@ $(document).ready(function () {
         })
     })
 
+    //chuc nang search theo ten
+    $('#searchByName').click(function (){
+        let text = $('#search').val();
+        $.ajax({
+            url: origin + '/searchByName',
+            type: 'GET',
+            data:{
+                text:text
+            },
+
+            success:function (res){
+                show(res)
+            },
+
+            error:function (){
+
+            }
+        })
+    })
 
 
 });
