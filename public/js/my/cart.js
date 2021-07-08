@@ -240,8 +240,6 @@ $(window).on('load', function () {
 
             $('#province').html(html)
 
-
-
         },
 
         error: function () {
@@ -275,12 +273,16 @@ $(document).ready(function (){
                 })
 
                 $('#district').html(html)
+
             },
 
             error: function () {
 
             }
         })
+    })
+    $('#1').click(function (){
+        console.log(1)
     })
 
     // hien thi phuong xa

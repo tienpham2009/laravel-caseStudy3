@@ -1,4 +1,4 @@
-@extends('admin.master')
+@extends('admin.products.master')
 @section('content')
     <!-- Start Shop Detail  -->
     <div class="shop-detail-box-main">

@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use Brian2694\Toastr\Toastr;
+use Brian2694\Toastr\ToastrServiceProvider;
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,7 +21,7 @@ class AuthController extends Controller
         return view('login');
     }
 
-    public function login(Request $request): \Illuminate\Http\RedirectResponse
+    public function login(LoginRequest $request): \Illuminate\Http\RedirectResponse
     {
         $remember = $request->has('remember');
         $email = $request->email;
@@ -27,7 +31,7 @@ class AuthController extends Controller
             'password' => $password
         ];
 
-        if (!Auth::attempt($data)) {
+        if (!Auth::attempt($data,$remember)) {
             session()->flash('login-error', 'Tài khoản hoặc mật khẩu không chính xác');
             return redirect()->route('auth.showFormLogin');
         }
@@ -46,24 +50,27 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'address' => $data['address'],
+            'phone'=>$data['phone'],
         ]);
     }
 
-    public function register(Request $request)
+    public function register(RegisterRequest $request)
     {
         $name = $request->name;
         $password = $request->password;
         $email = $request->email;
-        $address = $request->address;
+        $phone=$request->phone;
+        $address = $request->province.','.$request->district.','.$request->ward;
         $data = [
             'name' => $name,
             'email' => $email,
             'password' => $password,
             'address' => $address,
+            'phone'=>$phone,
         ];
         $check = $this->create($data);
         if ($check) {
-            Session::flash('register-success', 'Đăng ký thành công');
+            Session::flash('message', 'Đăng ký thành công');
         }
         return redirect()->route('auth.showFormLogin');
     }

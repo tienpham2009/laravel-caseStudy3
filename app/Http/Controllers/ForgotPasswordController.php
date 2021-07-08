@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\ForgetPasswordRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
@@ -18,12 +19,8 @@ class ForgotPasswordController extends Controller
         return view('forgot_password');
     }
 
-    public function submitForgetPasswordForm(Request $request)
+    public function submitForgetPasswordForm(ForgetPasswordRequest $request)
     {
-        $request->validate([
-            'email'=>'required|email|exists:users'
-        ]);
-
         $token = Str::random(64);
 
         DB::table('password_resets')->insert([
