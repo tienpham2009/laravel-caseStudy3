@@ -1,7 +1,19 @@
 @extends('master')
 @section('content')
-    <div class="container">
+    <div class="all-title-box">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h2>Thanh toán</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" style="margin-top: 50px">
         <div class="col-sm-6 col-lg-6 mb-3">
+            <div class="alert alert-success" role="alert">
+                <h1 class="alert-heading">Thanh toán thành công !!</h1>
+            </div>
             <div class="col-md-12 col-lg-12">
                 <div class="order-box">
 
@@ -25,16 +37,8 @@
                     </div>
                     <hr class="my-1">
                     <div class="d-flex">
-                        <h4>Coupon Discount</h4>
-                        <div class="ml-auto font-weight-bold"> $ 0</div>
-                    </div>
-                    <div class="d-flex">
-                        <h4>Tax</h4>
-                        <div class="ml-auto font-weight-bold"> $ 0</div>
-                    </div>
-                    <div class="d-flex">
-                        <h4>Shipping Cost</h4>
-                        <div class="ml-auto font-weight-bold"> Free</div>
+                        <h4>Phí vân chuyển:</h4>
+                        <div class="ml-auto font-weight-bold"> Miễn phí</div>
                     </div>
                     <hr>
                     <div class="d-flex gr-total">

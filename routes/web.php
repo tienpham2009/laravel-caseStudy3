@@ -34,6 +34,7 @@ Route::post('payment' , [BillController::class , 'payment'])->name('payment');
 Route::get('bill' , [BillController::class , 'bill'])->name('bill');
 Route::get('sort' , [ProductController::class , 'sort'])->name('sort');
 Route::get('search' , [ProductController::class , 'search'])->name('search');
+Route::get('searchByName' , [ProductController::class , 'searchByName'])->name('searchByName');
 
 
 
