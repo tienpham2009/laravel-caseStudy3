@@ -15,6 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $this->isPermission('admin');
         $categories=Category::all();
         return view('admin.categories.show',compact('categories'));
     }
@@ -26,6 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $this->isPermission('admin');
         return view('admin.categories.create');
     }
 
@@ -62,6 +64,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        $this->isPermission('admin');
         $category=Category::findOrFail($id);
         return view('admin.categories.edit',compact('category'));
     }
@@ -89,6 +92,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $this->isPermission('admin');
         DB::beginTransaction();
         try {
             $category = Category::findOrFail($id);

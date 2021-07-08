@@ -14,7 +14,8 @@
     <meta name="keywords" content="">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css"
+          rel="stylesheet">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -50,14 +51,13 @@
     <link rel="stylesheet" href="{{ asset('css/my/my.css') }}">
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-{{--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>--}}
-{{--    <script src=//code.jquery.com/jquery-3.5.1.slim.min.js--}}
-{{--            integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>--}}
+    {{--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>--}}
+    {{--    <script src=//code.jquery.com/jquery-3.5.1.slim.min.js--}}
+    {{--            integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>--}}
 
 
-{{--    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>--}}
+    {{--    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>--}}
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
 
 
 </head>
@@ -87,11 +87,16 @@
             <div class="collapse navbar-collapse" id="navbar-menu">
                 <ul class="nav navbar-nav ml-auto" data-in="fadeInDown" data-out="fadeOutUp">
                     <li class="nav-item active"><a class="nav-link" href="{{ route('index') }}">Home</a></li>
+                    @can('admin')
+                        <li class="nav-item active"><a class="nav-link" href="{{ route('Product.show') }}">Manager</a></li>
+                    @endcan
                     @if(auth()->check())
                         <li class="dropdown">
-                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Profile</a>
+                            <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">{{\Illuminate\Support\Facades\Auth::user()->name}}</a>
                             <ul class="dropdown-menu">
-                                <li><a href="{{route('user.profile',\Illuminate\Support\Facades\Auth::id())}}">Profile</a></li>
+                                <li>
+                                    <a href="{{route('user.profile',\Illuminate\Support\Facades\Auth::id())}}">Profile</a>
+                                </li>
                                 <li><a href="{{route('auth.logout')}}">Log out</a></li>
                             </ul>
                         </li>
@@ -159,7 +164,6 @@
 {{--        <a href="https://html.design/">html design</a></p>--}}
 {{--</div>--}}
 <!-- End copyright  -->
-
 
 
 <script src="{{ asset('js/my/show.js') }}"></script>

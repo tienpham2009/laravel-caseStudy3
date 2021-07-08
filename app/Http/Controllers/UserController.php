@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditProfile1Request;
 use App\Http\Requests\EditProfileRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -20,7 +21,7 @@ class UserController extends Controller
         $user->save();
         return redirect()->route('index');
     }
-    public function editProfile($id,Request $request){;
+    public function editProfile($id,EditProfile1Request $request){;
         $user=User::findOrFail($id);
         $user->name=$request->name;
         $user->phone=$request->phone;
