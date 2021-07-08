@@ -34,8 +34,17 @@ class AuthController extends Controller
         if (!Auth::attempt($data,$remember)) {
             session()->flash('login-error', 'Tài khoản hoặc mật khẩu không chính xác');
             return redirect()->route('auth.showFormLogin');
+        }else{
+            $id =Auth::id();
+            $user=User::findOrFail($id);
+            if ($user->type===0){
+                return redirect()->route('index');
+            }
+            else{
+                return redirect()->route('Product.show');
+            }
         }
-        return redirect()->route('index');
+
     }
 
     public function showFormRegister()

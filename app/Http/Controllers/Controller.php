@@ -13,7 +13,7 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
     function isPermission($permission){
-        if (Gate::allows($permission,Auth::user())){
+        if (!Gate::allows($permission,Auth::user())){
             abort(403);
         }
         return true;

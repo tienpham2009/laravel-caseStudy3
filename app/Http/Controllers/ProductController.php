@@ -16,13 +16,11 @@ class ProductController extends Controller
 
     public function __construct(ProductService $productService)
     {
-        $this->isPermission('admin');
         $this->productService = $productService;
     }
 
     public function index()
-    {
-        $this->isPermission('admin');
+    {$this->isPermission('admin');
         $products = $this->productService->getAll();
         return view('admin.products.show', compact('products'));
     }
@@ -35,7 +33,6 @@ class ProductController extends Controller
 
     public function store(ProductRequest $productRequest)
     {
-        $this->isPermission('admin');
         $this->productService->store($productRequest);
         return redirect()->route('Product.show');
     }
@@ -63,7 +60,6 @@ class ProductController extends Controller
 
     public function delete(Request $request)
     {
-        $this->isPermission('admin');
         $ids = $request->id;
         $this->productService->destroy($ids);
 
@@ -71,7 +67,6 @@ class ProductController extends Controller
 
     public function user()
     {
-        $this->isPermission('admin');
         $products = $this->productService->getAll();
         $data = [
             'status' => 'success',
@@ -84,7 +79,6 @@ class ProductController extends Controller
 
     public function filterByCate(Request $request)
     {
-        $this->isPermission('admin');
         $category_id = $request->category_id;
         $products = $this->productService->getByCate($category_id);
         $data = [
@@ -98,7 +92,6 @@ class ProductController extends Controller
 
     public function show()
     {
-        $this->isPermission('admin');
         $products = $this->productService->getAll();
         $categories = Category::all();
         return view('index', compact('products' , 'categories'));
@@ -106,7 +99,6 @@ class ProductController extends Controller
 
     public function filterPrice(Request $request)
     {
-        $this->isPermission('admin');
         $prices = $request->prices;
         $products = $this->productService->filterPrice($prices);
         $data = [
@@ -118,14 +110,12 @@ class ProductController extends Controller
 
     public function detailProduct($id)
     {
-        $this->isPermission('admin');
         $product = $this->productService->getById($id);
         return view('user.detail', compact('product'));
     }
 
     public function sort(Request $request)
     {
-        $this->isPermission('admin');
         $sort = $request->sort;
 
         $products = $this->productService->sort($sort);
@@ -139,7 +129,6 @@ class ProductController extends Controller
 
     public function search(Request $request)
     {
-        $this->isPermission('admin');
         $text = $request->text;
         $productName = $this->productService->search($text);
         $data = [
