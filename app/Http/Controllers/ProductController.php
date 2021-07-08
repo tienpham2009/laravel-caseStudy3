@@ -76,7 +76,7 @@ class ProductController extends Controller
         $data = [
             'status' => 'success',
             'data' => $products
-        ];
+        ];;
         return response()->json($data);
 
 

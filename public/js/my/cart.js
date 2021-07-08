@@ -133,6 +133,7 @@ $(document).ready(function () {
             },
 
             success: function (res) {
+                console.log(res)
                 show(res)
             },
 
@@ -149,7 +150,7 @@ $(document).ready(function () {
             url: origin + '/show',
 
             success: function (res) {
-                show(res)
+                show(res.data)
             },
 
             error: function () {
@@ -164,6 +165,7 @@ $(document).ready(function () {
         $(':checkbox:checked').each(function (i) {
             id[i] = $(this).val();
         });
+        console.log(id)
         if (id.length === 0) {
             $('#content').html('Chọn sản phẩm bạn muốn xóa !');
         } else {

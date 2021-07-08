@@ -72,13 +72,17 @@
                                                        href="{{ route('Product.detail' , $product->id) }}">Chi tiết</a>
                                                 </td>
                                             </tr>
+
                                         @empty
                                             <div class="filtr-item col-sm-2">
                                                 <p>Chưa có sản phẩm nào</p>
                                             </div>
                                         @endforelse
+
                                         </tbody>
+
                                     </table>
+                                    {{ $products->links() }}
                                 </div>
                             </div>
 
