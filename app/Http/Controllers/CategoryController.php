@@ -15,6 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $this->isPermission('admin');
         $categories=Category::all();
         return view('admin.categories.show',compact('categories'));
     }
@@ -26,6 +27,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $this->isPermission('admin');
         return view('admin.categories.create');
     }
 
@@ -37,6 +39,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
+        $this->isPermission('admin');
         $category=new Category();
         $category->name=$request->name;
         $category->save();
@@ -62,6 +65,7 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
+        $this->isPermission('admin');
         $category=Category::findOrFail($id);
         return view('admin.categories.edit',compact('category'));
     }
@@ -75,6 +79,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $this->isPermission('admin');
         $category=Category::findOrFail($id);
         $category->name=$request->name;
         $category->save();
@@ -89,6 +94,7 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
+        $this->isPermission('admin');
         DB::beginTransaction();
         try {
             $category = Category::findOrFail($id);

@@ -84,7 +84,7 @@
 
                         <div class="product-categorie-box">
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane fade show active" id="grid-view">
+                                <div role="tabpanel" class="tab-pane show active" id="grid-view">
                                     <div class="row filter-data">
                                         @forelse($products as $product)
                                             <div class="col-sm-6 col-md-6 col-lg-4 col-xl-4">
