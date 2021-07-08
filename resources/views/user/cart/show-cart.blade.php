@@ -90,9 +90,7 @@
                 <div class="col-lg-4 col-sm-4">
                     <div class="update-box float-right">
                         {{--                        <button type="button" id="delete-cart" class="btn hvr-hover">Xóa</button>--}}
-                        <button type="button" class="btn btn hvr-hover" data-toggle="modal" data-target="#exampleModal">
-                            Xóa
-                        </button>
+
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                              aria-hidden="true">
@@ -117,10 +115,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-sm-4">
-                    <div class="update-box float-right">
-                        <a href="" type="button" class="btn hvr-hover">Cập nhập giỏ hàng</a>
-                    </div>
+                <div class="col-lg-4 col-sm-4" >
+                    <button type="button" class="btn btn hvr-hover" data-toggle="modal" data-target="#exampleModal">
+                        Xóa
+                    </button>
                 </div>
             </div>
 
@@ -139,16 +137,16 @@
                         </div>
                         <div class="d-flex">
                             <h4>Discount</h4>
-                            <div class="ml-auto font-weight-bold"> $ 40</div>
+                            <div class="ml-auto font-weight-bold"> $</div>
                         </div>
                         <hr class="my-1">
                         <div class="d-flex">
                             <h4>Coupon Discount</h4>
-                            <div class="ml-auto font-weight-bold"> $ 10</div>
+                            <div class="ml-auto font-weight-bold"> $</div>
                         </div>
                         <div class="d-flex">
                             <h4>Tax</h4>
-                            <div class="ml-auto font-weight-bold"> $ 2</div>
+                            <div class="ml-auto font-weight-bold"> $</div>
                         </div>
                         <div class="d-flex">
                             <h4>Shipping Cost</h4>
@@ -160,16 +158,17 @@
                             <div class="ml-auto h5"> $
                                 @if(session()->has(auth()->id().'cart'))
                                     <span id="grand-total">{{ session()->get(auth()->id().'cart')->totalPrice }}</span>
-                                @endif</div>
+                                @endif
+                            </div>
                         </div>
                         <hr>
                     </div>
                 </div>
                 <div class="col-12 d-flex shopping-box">
-                    <button
-                        data-toggle="modal" data-target="#modalLoginForm"
-                        class="ml-auto btn hvr-hover">Checkout
-                    </button>
+                        <button
+                            data-toggle="modal" data-target="" id="check-out"
+                            class="ml-auto btn hvr-hover">Checkout
+                        </button>
                 </div>
             </div>
 
@@ -219,7 +218,7 @@
                                    placeholder="Địa chỉ cụ thể">
                         </div>
                         <div class="md-form col-12">
-                            <textarea class="form-control" rows="5"></textarea>
+                            <textarea class="form-control" rows="5" name="note"></textarea>
                             <label data-error="wrong" data-success="right" for="defaultForm-email">Ghi chú</label>
                         </div>
                     </div>
@@ -231,5 +230,24 @@
             </form>
         </div>
     </div>
-
+    <div class="modal fade" id="check-cart" tabindex="-1" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p id="content" style="color: red">Bạn chưa mua sản phẩm nào</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection

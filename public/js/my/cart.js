@@ -1,3 +1,4 @@
+let origin = location.origin
 function show(res) {
     let data = res.data
     let html = '';
@@ -11,7 +12,7 @@ function show(res) {
             '                                                    <img src="' + origin + '/storage/productImage/' + item.image + '" class="img-fluid" alt="Image">\n' +
             '                                                    <div class="mask-icon">\n' +
             '                                                        <ul>\n' +
-            '                                                            <li><a href="#" data-toggle="tooltip" data-placement="right"\n' +
+            '                                                            <li><a href="'+ origin +'/'+ item.id+ '/detail'+'" data-toggle="tooltip" data-placement="right"\n' +
             '                                                                   title="View"><i class="fas fa-eye"></i></a></li>\n' +
             '                                                            <li><a href="#" data-toggle="tooltip" data-placement="right"\n' +
             '                                                                   title="Compare"><i class="fas fa-sync-alt"></i></a>\n' +
@@ -34,7 +35,6 @@ function show(res) {
     $('.filter-data').html(html);
 }
 
-let origin = location.origin
 
 $(document).ready(function () {
 
@@ -52,11 +52,15 @@ $(document).ready(function () {
                 url: origin + '/cart/delete-cart',
                 data: {id: id},
 
-                success: function () {
+                success: function (res) {
+                    let subTotal = res.totalPrice;
+                    console.log(subTotal)
                     for (let i = 0; i < id.length; i++) {
                         $('#delete-' + id[i]).remove()
                         $('#checkAll').prop('checked', false)
                     }
+                    $('#grand-total').html(subTotal)
+                    $('#sub-total').html(subTotal)
                 },
 
                 error: function () {
@@ -64,6 +68,7 @@ $(document).ready(function () {
                 }
             });
             $('#delete-cart').attr('data-dismiss', 'modal')
+
         }
 
 
@@ -179,6 +184,36 @@ $(document).ready(function () {
                 }
             });
         }
+    })
+
+    //chuc nang kiem tra check-out
+    $('body').on('click' , '#check-out' , function (){
+        let price = $('#grand-total').html();
+        if (price > 0){
+            $(this).attr('data-target' , '#modalLoginForm');
+        }else {
+            $(this).attr('data-target' , '#check-cart')
+        }
+    })
+
+    //chuc nang sap xep theo gia
+    $('#basic').change(function (){
+        let sort = $(this).val()
+        $.ajax({
+            url: origin + '/sort',
+            type: 'GET',
+            data:{
+                sort:sort
+            },
+
+            success:function (res){
+                show(res)
+            },
+
+            error:function (){
+
+            }
+        })
     })
 
 
@@ -383,6 +418,5 @@ function filterCate(category_id) {
         }
     });
 }
-
 
 

@@ -47,7 +47,51 @@
     <link rel="stylesheet" href="{{ asset('css/my/my.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src=//code.jquery.com/jquery-3.5.1.slim.min.js integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
+    <script src=//code.jquery.com/jquery-3.5.1.slim.min.js
+            integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs=" crossorigin=anonymous></script>
+    <link href="https://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" rel="Stylesheet"/>
+
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        //chuc nang search
+        function search() {
+
+            let text = $('#search').val();
+            $.ajax({
+                url: origin + '/search',
+                type: 'GET',
+                data: {
+                    text: text
+                },
+
+
+                success: function (res) {
+                    let productName = [];
+                    let data = res.data;
+                    $.each(data, function (index, item) {
+                        productName.push(item)
+                    })
+
+                    $('#search').autocomplete({
+                        source: productName
+                    });
+
+
+                },
+
+                error: function () {
+
+                }
+            })
+
+        }
+
+    </script>
+
+
 </head>
 
 <body>
@@ -81,6 +125,7 @@
                     <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
                     <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
                     @if(auth()->check())
+<<<<<<< HEAD
                         <li class="dropdown">
                             <a href="#" class="nav-link dropdown-toggle arrow" data-toggle="dropdown">Profile</a>
                             <ul class="dropdown-menu">
@@ -98,9 +143,8 @@
             <!-- Start Atribute Navigation -->
             <div class="attr-nav">
                 <ul>
-                    <li class="search"><a href="#"><i class="fa fa-search"></i></a></li>
                     <li class="side-menu">
-                        <a href="#" class="">
+                        <a href="#" class="my-cart">
                             <i class="fa fa-shopping-bag"></i>
                             @if(session()->has('cart'))
                                 <span id="count-cart" class="badge">{{ count(session()->get('cart')->items) }}</span>
@@ -153,10 +197,9 @@
 {{--        <a href="https://html.design/">html design</a></p>--}}
 {{--</div>--}}
 <!-- End copyright  -->
+
 <script src="{{ asset('js/my/cart.js') }}"></script>
-
 <script src="{{ asset('js/my/show.js') }}"></script>
-
 
 <!-- ALL JS FILES -->
 <script src="{{ asset('js/jquery-3.2.1.min.js') }}"></script>

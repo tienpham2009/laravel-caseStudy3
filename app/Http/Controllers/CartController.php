@@ -54,6 +54,9 @@ class CartController extends Controller
         } else {
             \session()->flash('delete_error', 'Bạn chưa mua sản phẩm nào');
         }
+        $casts = \session()->get($user_id.'cart');
+        return response()->json($casts);
+
     }
 
     public function update(Request $request)
